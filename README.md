@@ -1,8 +1,24 @@
-html5.parallax project
+Html5.parallax Project
 =========
 
-##This is my html5.parallax project 
+##This is my html5.parallax project under the MIT License
 
-must be include : JQuery
+#Name 
+html5.parallax
 
-operate method as the DEMO site.
+#Type 
+javascript, jquery
+
+#Feature 
+1. frontend plugin 
+2. customized parameter
+3. easy to operate
+
+#Include
+mousewheel http://brandonaaron.net, jQuery Easing v1.3, Stellar.js v0.5.0
+
+#Base on
+HTML5, CSS3, Javascript, JQuery
+
+#Manual
+operate method as shown in DEMO website
