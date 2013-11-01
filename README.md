@@ -1,7 +1,7 @@
 Html5.parallax Project
 =========
 
-##This is my html5.parallax project under the MIT License
+###This is my html5.parallax project under the MIT License
 
 ####Name 
 html5.parallax
