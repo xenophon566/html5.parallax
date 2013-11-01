@@ -101,6 +101,12 @@ section#contact {
 	padding: 0 4%;
 }
 
+.mylink a {
+	font-weight: bold;
+	text-decoration: none;
+	color: inherit;
+}
+
 /*section demo*/
 .action {
 	position: fixed;
