@@ -23,28 +23,649 @@ d)<1/2.75?b*7.5625*a*a+c:a<2/2.75?b*(7.5625*(a-=1.5/2.75)*a+0.75)+c:a<2.5/2.75?b
  * This content is released under the MIT license
  * http://markdalgleish.mit-license.org
 **/
-(function(f,g,v,h){function q(a,c){this.element=a;this.options=f.extend({},x,c);this._defaults=x;this._name=k;this.init()}var k="stellar",x={scrollProperty:"scroll",positionProperty:"position",horizontalScrolling:!0,verticalScrolling:!0,horizontalOffset:0,verticalOffset:0,responsive:!1,parallaxBackgrounds:!0,parallaxElements:!0,hideDistantElements:!0,hideElement:function(a){a.hide()},showElement:function(a){a.show()}},r={scroll:{getTop:function(a){return a.scrollTop()},setTop:function(a,c){a.scrollTop(c)},
-getLeft:function(a){return a.scrollLeft()},setLeft:function(a,c){a.scrollLeft(c)}},position:{getTop:function(a){return-1*parseInt(a.css("top"),10)},setTop:function(a,c){a.css("top",c)},getLeft:function(a){return-1*parseInt(a.css("left"),10)},setLeft:function(a,c){a.css("left",c)}},margin:{getTop:function(a){return-1*parseInt(a.css("margin-top"),10)},setTop:function(a,c){a.css("margin-top",c)},getLeft:function(a){return-1*parseInt(a.css("margin-left"),10)},setLeft:function(a,c){a.css("margin-left",
-c)}},transform:{getTop:function(a){return"none"!==getComputedStyle(a[0])[n]?-1*parseInt(getComputedStyle(a[0])[n].match(/(-?[0-9]+)/g)[5],10):0},setTop:function(a,c){y(a,c,"Y")},getLeft:function(a){return"none"!==getComputedStyle(a[0])[n]?-1*parseInt(getComputedStyle(a[0])[n].match(/(-?[0-9]+)/g)[4],10):0},setLeft:function(a,c){y(a,c,"X")}}},z={position:{setTop:function(a,c){a.css("top",c)},setLeft:function(a,c){a.css("left",c)}},transform:{setPosition:function(a,c,b,d,e){a[0].style[n]="translate3d("+
-(c-b||0)+"px, "+(d-e||0)+"px, 0)"}}},n=function(){var a=/^(Moz|Webkit|Khtml|O|ms|Icab)(?=[A-Z])/,c=v.getElementsByTagName("script")[0].style,b="",d;for(d in c)if(a.test(d)){b=d.match(a)[0];break}"WebkitOpacity"in c&&(b="Webkit");"KhtmlOpacity"in c&&(b="Khtml");return function(a){return b+(0<b.length?a.charAt(0).toUpperCase()+a.slice(1):a)}}()("transform"),A=v.createElement("div").style.backgroundPositionX!==h,w=function(){return A?function(a,c,b){a.css({"background-position-x":c,"background-position-y":b})}:
-function(a,c,b){a.css("background-position",c+" "+b)}}(),B=function(){return A?function(a){return[a[0].style.backgroundPositionX,a[0].style.backgroundPositionY]}:function(a){return a.css("background-position").split(" ")}}(),y=function(a,c,b){var d=getComputedStyle(a[0])[n];if("none"===d)a[0].style[n]="translate"+b+"("+c+"px)";else{a=a[0].style;var e=n;var p=/(-?[0-9]+[.]?[0-9]*)/g;b="X"===b?5:6;-1===d.search(p)?c=d:(p=d.split(p),b=2*b-1,p[b]===h?c=d:(p[b]=c,c=p.join("")));a[e]=c}};q.prototype={init:function(){this.options.name=
-k+"_"+Math.floor(1E4*Math.random());this._defineElements();this._defineGetters();this._defineSetters();this._handleWindowLoadAndResize();this._detectViewport();this.refresh({firstLoad:!0});this._startAnimationLoop()},_defineElements:function(){this.element===v.body&&(this.element=g);this.$scrollElement=f(this.element);this.$element=this.element===g?f("body"):this.$scrollElement;this.$viewportElement=this.options.viewportElement!==h?f(this.options.viewportElement):this.$scrollElement[0]===g||0===this.options.scrollProperty.indexOf("scroll")?
-this.$scrollElement:this.$scrollElement.parent()},_defineGetters:function(){var a=this;this._getScrollLeft=function(){return r[a.options.scrollProperty].getLeft(a.$scrollElement)};this._getScrollTop=function(){return r[a.options.scrollProperty].getTop(a.$scrollElement)}},_defineSetters:function(){var a=this,c=z[a.options.positionProperty];this._setScrollLeft=function(b){r[a.options.scrollProperty].setLeft(a.$scrollElement,b)};this._setScrollTop=function(b){r[a.options.scrollProperty].setTop(a.$scrollElement,
-b)};this._setPosition=c.setPosition||function(b,d,e,p,f){a.options.horizontalScrolling&&c.setLeft(b,d,e);a.options.verticalScrolling&&c.setTop(b,p,f)}},_handleWindowLoadAndResize:function(){var a=this,c=f(g);a.options.responsive&&c.bind("load."+this.name,function(){a.refresh()});c.bind("resize."+this.name,function(){a._detectViewport();a.options.responsive&&a.refresh()})},refresh:function(a){var c=this,b=c._getScrollLeft(),d=c._getScrollTop();this._setScrollLeft(0);this._setScrollTop(0);this._setOffsets();
-this._findParticles();this._findBackgrounds();a&&a.firstLoad&&/WebKit/.test(navigator.userAgent)&&f(g).load(function(){var a=c._getScrollLeft(),b=c._getScrollTop();c._setScrollLeft(a+1);c._setScrollTop(b+1);c._setScrollLeft(a);c._setScrollTop(b)});c._setScrollLeft(b);c._setScrollTop(d)},_detectViewport:function(){var a=this.$viewportElement.offset(),c=null!==a&&a!==h;this.viewportWidth=this.$viewportElement.width();this.viewportHeight=this.$viewportElement.height();this.viewportOffsetTop=c?a.top:
-0;this.viewportOffsetLeft=c?a.left:0},_findParticles:function(){var a=this;this._getScrollLeft();this._getScrollTop();if(this.particles!==h)for(var c=this.particles.length-1;0<=c;c--)this.particles[c].$element.data("stellar-elementIsActive",h);this.particles=[];this.options.parallaxElements&&this.$element.find("[data-stellar-ratio]").each(function(b){b=f(this);var c,e,p,g,u,m,k,l=0,n=0,t=0,s=0;if(!b.data("stellar-elementIsActive"))b.data("stellar-elementIsActive",this);else if(b.data("stellar-elementIsActive")!==
-this)return;a.options.showElement(b);b.data("stellar-startingLeft")?(b.css("left",b.data("stellar-startingLeft")),b.css("top",b.data("stellar-startingTop"))):(b.data("stellar-startingLeft",b.css("left")),b.data("stellar-startingTop",b.css("top")));p=b.position().left;g=b.position().top;u="auto"===b.css("margin-left")?0:parseInt(b.css("margin-left"),10);c="auto"===b.css("margin-top")?0:parseInt(b.css("margin-top"),10);u=b.offset().left-u;k=b.offset().top-c;b.parents().each(function(){var a=f(this);
-if(!0===a.data("stellar-offset-parent"))return l=t,n=s,m=a,!1;t+=a.position().left;s+=a.position().top});c=b.data("stellar-horizontal-offset")!==h?b.data("stellar-horizontal-offset"):m!==h&&m.data("stellar-horizontal-offset")!==h?m.data("stellar-horizontal-offset"):a.horizontalOffset;e=b.data("stellar-vertical-offset")!==h?b.data("stellar-vertical-offset"):m!==h&&m.data("stellar-vertical-offset")!==h?m.data("stellar-vertical-offset"):a.verticalOffset;a.particles.push({$element:b,$offsetParent:m,isFixed:"fixed"===
-b.css("position"),horizontalOffset:c,verticalOffset:e,startingPositionLeft:p,startingPositionTop:g,startingOffsetLeft:u,startingOffsetTop:k,parentOffsetLeft:l,parentOffsetTop:n,stellarRatio:b.data("stellar-ratio")!==h?b.data("stellar-ratio"):1,width:b.outerWidth(!0),height:b.outerHeight(!0),isHidden:!1})})},_findBackgrounds:function(){var a=this,c=this._getScrollLeft(),b=this._getScrollTop(),d;this.backgrounds=[];this.options.parallaxBackgrounds&&(d=this.$element.find("[data-stellar-background-ratio]"),
-this.$element.is("[data-stellar-background-ratio]")&&d.add(this.$element),d.each(function(){var e=f(this),d=B(e),g,k,m,n,l,r=0,t=0,s=0,q=0;if(!e.data("stellar-backgroundIsActive"))e.data("stellar-backgroundIsActive",this);else if(e.data("stellar-backgroundIsActive")!==this)return;e.data("stellar-backgroundStartingLeft")?w(e,e.data("stellar-backgroundStartingLeft"),e.data("stellar-backgroundStartingTop")):(e.data("stellar-backgroundStartingLeft",d[0]),e.data("stellar-backgroundStartingTop",d[1]));
-m="auto"===e.css("margin-left")?0:parseInt(e.css("margin-left"),10);g="auto"===e.css("margin-top")?0:parseInt(e.css("margin-top"),10);m=e.offset().left-m-c;n=e.offset().top-g-b;e.parents().each(function(){var a=f(this);if(!0===a.data("stellar-offset-parent"))return r=s,t=q,l=a,!1;s+=a.position().left;q+=a.position().top});g=e.data("stellar-horizontal-offset")!==h?e.data("stellar-horizontal-offset"):l!==h&&l.data("stellar-horizontal-offset")!==h?l.data("stellar-horizontal-offset"):a.horizontalOffset;
-k=e.data("stellar-vertical-offset")!==h?e.data("stellar-vertical-offset"):l!==h&&l.data("stellar-vertical-offset")!==h?l.data("stellar-vertical-offset"):a.verticalOffset;a.backgrounds.push({$element:e,$offsetParent:l,isFixed:"fixed"===e.css("background-attachment"),horizontalOffset:g,verticalOffset:k,startingValueLeft:d[0],startingValueTop:d[1],startingBackgroundPositionLeft:isNaN(parseInt(d[0],10))?0:parseInt(d[0],10),startingBackgroundPositionTop:isNaN(parseInt(d[1],10))?0:parseInt(d[1],10),startingPositionLeft:e.position().left,
-startingPositionTop:e.position().top,startingOffsetLeft:m,startingOffsetTop:n,parentOffsetLeft:r,parentOffsetTop:t,stellarRatio:e.data("stellar-background-ratio")===h?1:e.data("stellar-background-ratio")})}))},destroy:function(){var a,c,b,d;for(d=this.particles.length-1;0<=d;d--)a=this.particles[d],c=a.$element.data("stellar-startingLeft"),b=a.$element.data("stellar-startingTop"),this._setPosition(a.$element,c,c,b,b),this.options.showElement(a.$element),a.$element.data("stellar-startingLeft",null).data("stellar-elementIsActive",
-null).data("stellar-backgroundIsActive",null);for(d=this.backgrounds.length-1;0<=d;d--)a=this.backgrounds[d],w(a.$element,a.startingValueLeft,a.startingValueTop);this._animationLoop=f.noop;f(g).unbind("load."+this.name).unbind("resize."+this.name)},_setOffsets:function(){var a=this,c=f(g);c.unbind("resize.horizontal-"+this.name).unbind("resize.vertical-"+this.name);"function"===typeof this.options.horizontalOffset?(this.horizontalOffset=this.options.horizontalOffset(),c.bind("resize.horizontal-"+
-this.name,function(){a.horizontalOffset=a.options.horizontalOffset()})):this.horizontalOffset=this.options.horizontalOffset;"function"===typeof this.options.verticalOffset?(this.verticalOffset=this.options.verticalOffset(),c.bind("resize.vertical-"+this.name,function(){a.verticalOffset=a.options.verticalOffset()})):this.verticalOffset=this.options.verticalOffset},_repositionElements:function(){var a=this._getScrollLeft(),c=this._getScrollTop(),b,d,e,f=e=!0,g,h,m,k,l;if(this.currentScrollLeft!==a||
-this.currentScrollTop!==c||this.currentWidth!==this.viewportWidth||this.currentHeight!==this.viewportHeight){this.currentScrollLeft=a;this.currentScrollTop=c;this.currentWidth=this.viewportWidth;this.currentHeight=this.viewportHeight;for(l=this.particles.length-1;0<=l;l--)b=this.particles[l],d=b.isFixed?1:0,this.options.horizontalScrolling&&(g=(a+b.horizontalOffset+this.viewportOffsetLeft+b.startingPositionLeft-b.startingOffsetLeft+b.parentOffsetLeft)*-(b.stellarRatio+d-1)+b.startingPositionLeft,
-m=g-b.startingPositionLeft+b.startingOffsetLeft),this.options.verticalScrolling&&(h=(c+b.verticalOffset+this.viewportOffsetTop+b.startingPositionTop-b.startingOffsetTop+b.parentOffsetTop)*-(b.stellarRatio+d-1)+b.startingPositionTop,k=h-b.startingPositionTop+b.startingOffsetTop),this.options.hideDistantElements&&(f=!this.options.horizontalScrolling||m+b.width>(b.isFixed?0:a)&&m<(b.isFixed?0:a)+this.viewportWidth+this.viewportOffsetLeft,e=!this.options.verticalScrolling||k+b.height>(b.isFixed?0:c)&&
-k<(b.isFixed?0:c)+this.viewportHeight+this.viewportOffsetTop),f&&e?(b.isHidden&&(this.options.showElement(b.$element),b.isHidden=!1),this._setPosition(b.$element,g,b.startingPositionLeft,h,b.startingPositionTop)):b.isHidden||(this.options.hideElement(b.$element),b.isHidden=!0);for(l=this.backgrounds.length-1;0<=l;l--)b=this.backgrounds[l],d=b.isFixed?0:1,e=this.options.horizontalScrolling?(a+b.horizontalOffset-this.viewportOffsetLeft-b.startingOffsetLeft+b.parentOffsetLeft-b.startingBackgroundPositionLeft)*
-(d-b.stellarRatio)+"px":b.startingValueLeft,d=this.options.verticalScrolling?(c+b.verticalOffset-this.viewportOffsetTop-b.startingOffsetTop+b.parentOffsetTop-b.startingBackgroundPositionTop)*(d-b.stellarRatio)+"px":b.startingValueTop,w(b.$element,e,d)}},_startAnimationLoop:function(){var a=this,c=function(){return g.requestAnimationFrame||g.webkitRequestAnimationFrame||g.mozRequestAnimationFrame||g.oRequestAnimationFrame||g.msRequestAnimationFrame||function(a,c){g.setTimeout(a,1E3/60)}}();this._animationLoop=
-function(){c(a._animationLoop);a._repositionElements()};this._animationLoop()}};f.fn[k]=function(a){var c=arguments;if(a===h||"object"===typeof a)return this.each(function(){f.data(this,"plugin_"+k)||f.data(this,"plugin_"+k,new q(this,a))});if("string"===typeof a&&"_"!==a[0]&&"init"!==a)return this.each(function(){var b=f.data(this,"plugin_"+k);b instanceof q&&"function"===typeof b[a]&&b[a].apply(b,Array.prototype.slice.call(c,1));"destroy"===a&&f.data(this,"plugin_"+k,null)})};f[k]=function(a){var c=
-f(g);return c.stellar.apply(c,Array.prototype.slice.call(arguments,0))};f[k].scrollProperty=r;f[k].positionProperty=z;g.Stellar=q})(jQuery,window,document);
+;(function($, window, document, undefined){
+
+	var pluginName = 'stellar',
+		defaults = {
+			scrollProperty: 'scroll',
+			positionProperty: 'position',
+			horizontalScrolling: true,
+			verticalScrolling: true,
+			horizontalOffset: 0,
+			verticalOffset: 0,
+			responsive: false,
+			parallaxBackgrounds: true,
+			parallaxElements: true,
+			hideDistantElements: true,
+			hideElement: function($elem) { $elem.hide(); },
+			showElement: function($elem) { $elem.show(); },
+			refWidth: $(window).width(),	//Realtime browser width
+			refHeight: $(window).height(),	//Realtime browser height
+			formula: function(a, b){ return Math.round(a / b * 100) / 100; }	//Proportional formula
+		},
+
+		scrollProperty = {
+			scroll: {
+				getTop: function($elem) { return $elem.scrollTop();	},
+				setTop: function($elem, val) { $elem.scrollTop(val); },
+
+				getLeft: function($elem) { return $elem.scrollLeft(); },
+				setLeft: function($elem, val) { $elem.scrollLeft(val); }
+			},
+			position: {
+				getTop: function($elem) { return parseInt($elem.css('top'), 10) * -1; },
+				setTop: function($elem, val) { $elem.css('top', val); },
+
+				getLeft: function($elem) { return parseInt($elem.css('left'), 10) * -1; },
+				setLeft: function($elem, val) { $elem.css('left', val); }
+			},
+			margin: {
+				getTop: function($elem) { return parseInt($elem.css('margin-top'), 10) * -1; },
+				setTop: function($elem, val) { $elem.css('margin-top', val); },
+
+				getLeft: function($elem) { return parseInt($elem.css('margin-left'), 10) * -1; },
+				setLeft: function($elem, val) { $elem.css('margin-left', val); }
+			},
+			transform: {
+				getTop: function($elem) { return (getComputedStyle($elem[0])[transform] !== 'none' ? parseInt(getComputedStyle($elem[0])[transform].match(/(-?[0-9]+)/g)[5], 10) * -1 : 0); },
+				setTop: function($elem, val) { setTransform($elem, val, 'Y'); },
+
+				getLeft: function($elem) { return (getComputedStyle($elem[0])[transform] !== 'none' ? parseInt(getComputedStyle($elem[0])[transform].match(/(-?[0-9]+)/g)[4], 10) * -1 : 0); },
+				setLeft: function($elem, val) {	setTransform($elem, val, 'X');	}
+			}
+		},
+
+		positionProperty = {
+			position: {
+				setTop: function($elem, top) { $elem.css('top', top); },
+				setLeft: function($elem, left) { $elem.css('left', left); }
+			},
+			transform: {
+				setPosition: function($elem, left, startingLeft, top, startingTop) {
+					$elem[0].style[transform] = 'translate3d(' + ((left - startingLeft) || 0) + 'px, ' + ((top - startingTop) || 0) + 'px, 0)';
+				}
+			}
+		},
+
+		vendorPrefix = (function() {
+			var prefixes = /^(Moz|Webkit|Khtml|O|ms|Icab)(?=[A-Z])/,
+				style = document.getElementsByTagName('script')[0].style,
+				prefix = '',
+				prop;
+
+			for (prop in style) {
+				if (prefixes.test(prop)) {
+					prefix = prop.match(prefixes)[0];
+					break;
+				}
+			}
+
+			if ('WebkitOpacity' in style) { prefix = 'Webkit'; }
+			if ('KhtmlOpacity' in style) { prefix = 'Khtml'; }
+
+			return function(property) {
+				return prefix + (prefix.length > 0 ? property.charAt(0).toUpperCase() + property.slice(1) : property);
+			};
+		}()),
+
+		transform = vendorPrefix('transform'),
+
+		supportsBackgroundPositionXY = document.createElement('div').style.backgroundPositionX !== undefined,
+
+		setBackgroundPosition = (function() {
+			return supportsBackgroundPositionXY ?
+				function($elem, x, y) {
+					$elem.css({
+						'background-position-x': x,
+						'background-position-y': y
+					});
+				} :
+				function($elem, x, y) {
+					$elem.css('background-position', x + ' ' + y);
+				};
+		}()),
+
+		getBackgroundPosition = (function() {
+			return supportsBackgroundPositionXY ?
+				function($elem) {
+					return [
+						$elem[0].style.backgroundPositionX,
+						$elem[0].style.backgroundPositionY
+					];
+				} :
+				function($elem) {
+					return $elem.css('background-position').split(' ');
+				};
+		}()),
+
+		setTransform = function($elem, val, dimension /* 'X' or 'Y' */) {
+			var currentTransform = getComputedStyle($elem[0])[transform];
+
+			if (currentTransform === 'none') {
+				$elem[0].style[transform] = 'translate' + dimension + '(' + val + 'px)';
+			} else {
+				$elem[0].style[transform] = replaceNthOccurence(currentTransform, /(-?[0-9]+[.]?[0-9]*)/g, (dimension === 'X' ? 5 : 6), val);
+			}
+		},
+
+		replaceNthOccurence = function(original, pattern, n, replace) {
+			var parts,
+				tempParts,
+				indexOfNthMatch;
+
+			if (original.search(pattern) === -1) {
+				return original;
+			}
+
+			parts = original.split(pattern);
+
+			indexOfNthMatch = n * 2 - 1;
+
+			if (parts[indexOfNthMatch] === undefined) {
+				return original;
+			}
+
+			parts[indexOfNthMatch] = replace;
+
+			return parts.join('');
+		};
+
+	function Plugin(element, options) {
+		this.element = element;
+		this.options = $.extend({}, defaults, options);
+
+		this._defaults = defaults;
+		this._name = pluginName;
+
+		this.init();
+	}
+
+	Plugin.prototype = {
+		init: function() {
+			this.options.name = pluginName + '_' + Math.floor(Math.random()*10000);
+
+			this._defineElements();
+			this._defineGetters();
+			this._defineSetters();
+			this._handleWindowLoadAndResize();
+
+			this._detectViewport();
+			this.refresh({ firstLoad: true });
+
+			this._startAnimationLoop();
+		},
+		_defineElements: function() {
+			if (this.element === document.body) this.element = window;
+			this.$scrollElement = $(this.element);
+			this.$element = this.element === window ? $('body') : this.$scrollElement;
+			this.$viewportElement = (this.options.viewportElement !== undefined ? $(this.options.viewportElement) : (this.$scrollElement[0] === window || this.options.scrollProperty.indexOf('scroll') === 0 ? this.$scrollElement : this.$scrollElement.parent()) );
+		},
+		_defineGetters: function() {
+			var self = this;
+
+			this._getScrollLeft = function() {
+				return scrollProperty[self.options.scrollProperty].getLeft(self.$scrollElement);
+			};
+
+			this._getScrollTop = function() {
+				return scrollProperty[self.options.scrollProperty].getTop(self.$scrollElement);
+			};
+		},
+		_defineSetters: function() {
+			var self = this,
+				positionPropertyAdapter = positionProperty[self.options.positionProperty];
+
+			this._setScrollLeft = function(val) {
+				scrollProperty[self.options.scrollProperty].setLeft(self.$scrollElement, val);
+			};
+
+			this._setScrollTop = function(val) {
+				scrollProperty[self.options.scrollProperty].setTop(self.$scrollElement, val);
+			};
+
+			this._setPosition = positionPropertyAdapter.setPosition ||
+				function($elem, left, startingLeft, top, startingTop) {
+					if (self.options.horizontalScrolling) {
+						positionPropertyAdapter.setLeft($elem, left, startingLeft);
+					}
+
+					if (self.options.verticalScrolling) {
+						positionPropertyAdapter.setTop($elem, top, startingTop);
+					}
+				};
+		},
+		_handleWindowLoadAndResize: function() {
+			var self = this,
+				$window = $(window);
+
+			if (self.options.responsive) {
+				$window.bind('load.' + this.name, function() {
+					self.refresh();
+				});
+			}
+
+			$window.bind('resize.' + this.name, function() {
+				self._detectViewport();
+
+				if (self.options.responsive) {
+					self.refresh();
+				}
+			});
+		},
+		refresh: function(options) {
+			var self = this,
+				oldLeft = self._getScrollLeft(),
+				oldTop = self._getScrollTop();
+
+			this._setScrollLeft(0);
+			this._setScrollTop(0);
+
+			this._setOffsets();
+			this._findParticles();
+			this._findBackgrounds();
+
+			// Fix for WebKit background rendering bug
+			if (options && options.firstLoad && /WebKit/.test(navigator.userAgent)) {
+				$(window).load(function(){
+					var oldLeft = self._getScrollLeft(),
+						oldTop = self._getScrollTop();
+
+					self._setScrollLeft(oldLeft + 1);
+					self._setScrollTop(oldTop + 1);
+
+					self._setScrollLeft(oldLeft);
+					self._setScrollTop(oldTop);
+				});
+			}
+
+			self._setScrollLeft(oldLeft);
+			self._setScrollTop(oldTop);
+		},
+		_detectViewport: function() {
+			var viewportOffsets = this.$viewportElement.offset(),
+				hasOffsets = viewportOffsets !== null && viewportOffsets !== undefined;
+
+			this.viewportWidth = this.$viewportElement.width();
+			this.viewportHeight = this.$viewportElement.height();
+
+			this.viewportOffsetTop = hasOffsets ? viewportOffsets.top : 0;
+			this.viewportOffsetLeft = hasOffsets ? viewportOffsets.left : 0;
+		},
+		_findParticles: function(){
+			var self = this,
+				scrollLeft = this._getScrollLeft(),
+				scrollTop = this._getScrollTop();
+
+			if (this.particles !== undefined) {
+				for (var i = this.particles.length - 1; i >= 0; i--) {
+					this.particles[i].$element.data('stellar-elementIsActive', undefined);
+				}
+			}
+
+			this.particles = [];
+
+			if (!this.options.parallaxElements) return;
+
+			this.$element.find('[data-stellar-ratio]').each(function(i){
+				var $this = $(this),
+					horizontalOffset,
+					verticalOffset,
+					positionLeft,
+					positionTop,
+					marginLeft,
+					marginTop,
+					$offsetParent,
+					offsetLeft,
+					offsetTop,
+					parentOffsetLeft = 0,
+					parentOffsetTop = 0,
+					tempParentOffsetLeft = 0,
+					tempParentOffsetTop = 0;
+
+				// Ensure this element isn't already part of another scrolling element
+				if (!$this.data('stellar-elementIsActive')) {
+					$this.data('stellar-elementIsActive', this);
+				} else if ($this.data('stellar-elementIsActive') !== this) {
+					return;
+				}
+
+				self.options.showElement($this);
+
+				// Save/restore the original top and left CSS values in case we refresh the particles or destroy the instance
+				if (!$this.data('stellar-startingLeft')) {
+					$this.data('stellar-startingLeft', $this.css('left'));
+					$this.data('stellar-startingTop', $this.css('top'));
+				} else {
+					$this.css('left', $this.data('stellar-startingLeft'));
+					$this.css('top', $this.data('stellar-startingTop'));
+				}
+
+				positionLeft = $this.position().left;
+				positionTop = $this.position().top;
+
+				// Catch-all for margin top/left properties (these evaluate to 'auto' in IE7 and IE8)
+				marginLeft = ($this.css('margin-left') === 'auto') ? 0 : parseInt($this.css('margin-left'), 10);
+				marginTop = ($this.css('margin-top') === 'auto') ? 0 : parseInt($this.css('margin-top'), 10);
+
+				offsetLeft = $this.offset().left - marginLeft;
+				offsetTop = $this.offset().top - marginTop;
+
+				// Calculate the offset parent
+				$this.parents().each(function(){
+					var $this = $(this);
+
+					if ($this.data('stellar-offset-parent') === true) {
+						parentOffsetLeft = tempParentOffsetLeft;
+						parentOffsetTop = tempParentOffsetTop;
+						$offsetParent = $this;
+
+						return false;
+					} else {
+						tempParentOffsetLeft += $this.position().left;
+						tempParentOffsetTop += $this.position().top;
+					}
+				});
+
+				// Detect the offsets
+				horizontalOffset = ($this.data('stellar-horizontal-offset') !== undefined ? $this.data('stellar-horizontal-offset') : ($offsetParent !== undefined && $offsetParent.data('stellar-horizontal-offset') !== undefined ? $offsetParent.data('stellar-horizontal-offset') : self.horizontalOffset));
+				verticalOffset = ($this.data('stellar-vertical-offset') !== undefined ? $this.data('stellar-vertical-offset') : ($offsetParent !== undefined && $offsetParent.data('stellar-vertical-offset') !== undefined ? $offsetParent.data('stellar-vertical-offset') : self.verticalOffset));
+
+				//Add our object to the particles collection
+				self.particles.push({
+					$element: $this,
+					$offsetParent: $offsetParent,
+					isFixed: $this.css('position') === 'fixed',
+					horizontalOffset: horizontalOffset,
+					verticalOffset: verticalOffset,
+					startingPositionLeft: positionLeft,
+					startingPositionTop: positionTop,
+					startingOffsetLeft: offsetLeft,
+					startingOffsetTop: offsetTop,
+					parentOffsetLeft: parentOffsetLeft,
+					parentOffsetTop: parentOffsetTop,
+					stellarRatio: $this.data('stellar-ratio') !== undefined ? $this.data('stellar-ratio') : 1,
+					width: $this.outerWidth(true),
+					height: $this.outerHeight(true),
+					isHidden: false
+				});
+			});
+		},
+		_findBackgrounds: function() {
+			var self = this,
+				scrollLeft = this._getScrollLeft(),
+				scrollTop = this._getScrollTop(),
+				$backgroundElements;
+
+			this.backgrounds = [];
+
+			if (!this.options.parallaxBackgrounds) return;
+
+			$backgroundElements = this.$element.find('[data-stellar-background-ratio]');
+
+			if (this.$element.is('[data-stellar-background-ratio]')) {
+				$backgroundElements.add(this.$element);
+			}
+
+			$backgroundElements.each(function(){
+				var $this = $(this),
+					backgroundPosition = getBackgroundPosition($this),
+					horizontalOffset,
+					verticalOffset,
+					positionLeft,
+					positionTop,
+					marginLeft,
+					marginTop,
+					offsetLeft,
+					offsetTop,
+					$offsetParent,
+					parentOffsetLeft = 0,
+					parentOffsetTop = 0,
+					tempParentOffsetLeft = 0,
+					tempParentOffsetTop = 0;
+
+				// Ensure this element isn't already part of another scrolling element
+				if (!$this.data('stellar-backgroundIsActive')) {
+					$this.data('stellar-backgroundIsActive', this);
+				} else if ($this.data('stellar-backgroundIsActive') !== this) {
+					return;
+				}
+
+				// Save/restore the original top and left CSS values in case we destroy the instance
+				if (!$this.data('stellar-backgroundStartingLeft')) {
+					$this.data('stellar-backgroundStartingLeft', backgroundPosition[0]);
+					$this.data('stellar-backgroundStartingTop', backgroundPosition[1]);
+				} else {
+					setBackgroundPosition($this, $this.data('stellar-backgroundStartingLeft'), $this.data('stellar-backgroundStartingTop'));
+				}
+
+				// Catch-all for margin top/left properties (these evaluate to 'auto' in IE7 and IE8)
+				marginLeft = ($this.css('margin-left') === 'auto') ? 0 : parseInt($this.css('margin-left'), 10);
+				marginTop = ($this.css('margin-top') === 'auto') ? 0 : parseInt($this.css('margin-top'), 10);
+
+				offsetLeft = $this.offset().left - marginLeft - scrollLeft;
+				offsetTop = $this.offset().top - marginTop - scrollTop;
+				
+				// Calculate the offset parent
+				$this.parents().each(function(){
+					var $this = $(this);
+
+					if ($this.data('stellar-offset-parent') === true) {
+						parentOffsetLeft = tempParentOffsetLeft;
+						parentOffsetTop = tempParentOffsetTop;
+						$offsetParent = $this;
+
+						return false;
+					} else {
+						tempParentOffsetLeft += $this.position().left;
+						tempParentOffsetTop += $this.position().top;
+					}
+				});
+
+				// Detect the offsets
+				horizontalOffset = ($this.data('stellar-horizontal-offset') !== undefined ? $this.data('stellar-horizontal-offset') : ($offsetParent !== undefined && $offsetParent.data('stellar-horizontal-offset') !== undefined ? $offsetParent.data('stellar-horizontal-offset') : self.horizontalOffset));
+				verticalOffset = ($this.data('stellar-vertical-offset') !== undefined ? $this.data('stellar-vertical-offset') : ($offsetParent !== undefined && $offsetParent.data('stellar-vertical-offset') !== undefined ? $offsetParent.data('stellar-vertical-offset') : self.verticalOffset));
+
+				self.backgrounds.push({
+					$element: $this,
+					$offsetParent: $offsetParent,
+					isFixed: $this.css('background-attachment') === 'fixed',
+					horizontalOffset: horizontalOffset,
+					verticalOffset: verticalOffset,
+					startingValueLeft: backgroundPosition[0],
+					startingValueTop: backgroundPosition[1],
+					startingBackgroundPositionLeft: isNaN(parseInt(backgroundPosition[0], 10)) ? 0 : parseInt(backgroundPosition[0], 10),
+					startingBackgroundPositionTop: isNaN(parseInt(backgroundPosition[1], 10)) ? 0 : parseInt(backgroundPosition[1], 10),
+					startingPositionLeft: $this.position().left,
+					startingPositionTop: $this.position().top,
+					startingOffsetLeft: offsetLeft,
+					startingOffsetTop: offsetTop,
+					parentOffsetLeft: parentOffsetLeft,
+					parentOffsetTop: parentOffsetTop,
+					stellarRatio: $this.data('stellar-background-ratio') === undefined ? 1 : $this.data('stellar-background-ratio')
+				});
+			});
+		},
+		destroy: function() {
+			var particle,
+				startingPositionLeft,
+				startingPositionTop,
+				background,
+				i;
+
+			for (i = this.particles.length - 1; i >= 0; i--) {
+				particle = this.particles[i];
+				startingPositionLeft = particle.$element.data('stellar-startingLeft');
+				startingPositionTop = particle.$element.data('stellar-startingTop');
+
+				this._setPosition(particle.$element, startingPositionLeft, startingPositionLeft, startingPositionTop, startingPositionTop);
+
+				this.options.showElement(particle.$element);
+
+				particle.$element.data('stellar-startingLeft', null).data('stellar-elementIsActive', null).data('stellar-backgroundIsActive', null);
+			}
+
+			for (i = this.backgrounds.length - 1; i >= 0; i--) {
+				background = this.backgrounds[i];
+				setBackgroundPosition(background.$element, background.startingValueLeft, background.startingValueTop);
+			}
+
+			this._animationLoop = $.noop;
+
+			$(window).unbind('load.' + this.name).unbind('resize.' + this.name);
+		},
+		_setOffsets: function() {
+			var self = this,
+				$window = $(window);
+
+			$window.unbind('resize.horizontal-' + this.name).unbind('resize.vertical-' + this.name);
+
+			if (typeof this.options.horizontalOffset === 'function') {
+				this.horizontalOffset = this.options.horizontalOffset();
+				$window.bind('resize.horizontal-' + this.name, function() {
+					self.horizontalOffset = self.options.horizontalOffset();
+				});
+			} else {
+				this.horizontalOffset = this.options.horizontalOffset;
+			}
+
+			if (typeof this.options.verticalOffset === 'function') {
+				this.verticalOffset = this.options.verticalOffset();
+				$window.bind('resize.vertical-' + this.name, function() {
+					self.verticalOffset = self.options.verticalOffset();
+				});
+			} else {
+				this.verticalOffset = this.options.verticalOffset;
+			}
+		},
+		_repositionElements: function() {
+			var scrollLeft = this._getScrollLeft(),
+				scrollTop = this._getScrollTop(),
+				horizontalOffset,
+				verticalOffset,
+				particle,
+				fixedRatioOffset,
+				background,
+				bgLeft,
+				bgTop,
+				isVisibleVertical = true,
+				isVisibleHorizontal = true,
+				newPositionLeft,
+				newPositionTop,
+				newOffsetLeft,
+				newOffsetTop,
+				i;
+
+			//First check that the scroll position or container size has changed
+			if (this.currentScrollLeft === scrollLeft && this.currentScrollTop === scrollTop && this.currentWidth === this.viewportWidth && this.currentHeight === this.viewportHeight) {
+				return;
+			} else {
+				this.currentScrollLeft = scrollLeft;
+				this.currentScrollTop = scrollTop;
+				this.currentWidth = this.viewportWidth;
+				this.currentHeight = this.viewportHeight;
+			}
+
+			//Reposition elements
+			for (i = this.particles.length - 1; i >= 0; i--) {
+				particle = this.particles[i];
+
+				fixedRatioOffset = particle.isFixed ? 1 : 0;
+
+				//Calculate position, then calculate what the particle's new offset will be (for visibility check)
+				if (this.options.horizontalScrolling) {
+					var bSize = this.options.refWidth, bResize = $(window).width(), bRatio = this.options.formula(bResize, bSize);
+					newPositionLeft = (scrollLeft + particle.horizontalOffset + this.viewportOffsetLeft + particle.startingPositionLeft - particle.startingOffsetLeft + particle.parentOffsetLeft) * -(particle.stellarRatio + fixedRatioOffset - 1) + particle.startingPositionLeft; newPositionLeft *= bRatio;
+					newOffsetLeft = newPositionLeft - particle.startingPositionLeft + particle.startingOffsetLeft;
+				}
+				if (this.options.verticalScrolling) {
+					var bSize = this.options.refHeight, bResize = $(window).height(), bRatio = this.options.formula(bResize, bSize);
+					newPositionTop = (scrollTop + particle.verticalOffset + this.viewportOffsetTop + particle.startingPositionTop - particle.startingOffsetTop + particle.parentOffsetTop) * -(particle.stellarRatio + fixedRatioOffset - 1) + particle.startingPositionTop; newPositionTop *= bRatio;
+					newOffsetTop = newPositionTop - particle.startingPositionTop + particle.startingOffsetTop;
+				}
+
+				//Check visibility
+				if (this.options.hideDistantElements) {
+					isVisibleHorizontal = !this.options.horizontalScrolling || newOffsetLeft + particle.width > (particle.isFixed ? 0 : scrollLeft) && newOffsetLeft < (particle.isFixed ? 0 : scrollLeft) + this.viewportWidth + this.viewportOffsetLeft;
+					isVisibleVertical = !this.options.verticalScrolling || newOffsetTop + particle.height > (particle.isFixed ? 0 : scrollTop) && newOffsetTop < (particle.isFixed ? 0 : scrollTop) + this.viewportHeight + this.viewportOffsetTop;
+				}
+
+				if (isVisibleHorizontal && isVisibleVertical) {
+					if (particle.isHidden) {
+						this.options.showElement(particle.$element);
+						particle.isHidden = false;
+					}
+
+					this._setPosition(particle.$element, newPositionLeft, particle.startingPositionLeft, newPositionTop, particle.startingPositionTop);
+				} else {
+					if (!particle.isHidden) {
+						this.options.hideElement(particle.$element);
+						particle.isHidden = true;
+					}
+				}
+			}
+
+			//Reposition backgrounds
+			for (i = this.backgrounds.length - 1; i >= 0; i--) {
+				background = this.backgrounds[i];
+
+				fixedRatioOffset = background.isFixed ? 0 : 1;
+				bgLeft = this.options.horizontalScrolling ? (scrollLeft + background.horizontalOffset - this.viewportOffsetLeft - background.startingOffsetLeft + background.parentOffsetLeft - background.startingBackgroundPositionLeft) * (fixedRatioOffset - background.stellarRatio) + 'px' : background.startingValueLeft;
+				bgTop = this.options.verticalScrolling ? (scrollTop + background.verticalOffset - this.viewportOffsetTop - background.startingOffsetTop + background.parentOffsetTop - background.startingBackgroundPositionTop) * (fixedRatioOffset - background.stellarRatio) + 'px' : background.startingValueTop;
+
+				setBackgroundPosition(background.$element, bgLeft, bgTop);
+			}
+		},
+		_startAnimationLoop: function() {
+			var self = this,
+				requestAnimFrame = (function(){
+					return window.requestAnimationFrame    ||
+						window.webkitRequestAnimationFrame ||
+						window.mozRequestAnimationFrame    ||
+						window.oRequestAnimationFrame      ||
+						window.msRequestAnimationFrame     ||
+						function(callback, element){
+							window.setTimeout(callback, 1000 / 60);
+						};
+				}());
+
+			this._animationLoop = function(){
+				requestAnimFrame(self._animationLoop);
+				self._repositionElements();
+			};
+			this._animationLoop();
+		}
+	};
+
+	$.fn[pluginName] = function (options) {
+		var args = arguments;
+		if (options === undefined || typeof options === 'object') {
+			return this.each(function () {
+				if (!$.data(this, 'plugin_' + pluginName)) {
+					$.data(this, 'plugin_' + pluginName, new Plugin(this, options));
+				}
+			});
+		} else if (typeof options === 'string' && options[0] !== '_' && options !== 'init') {
+			return this.each(function () {
+				var instance = $.data(this, 'plugin_' + pluginName);
+				if (instance instanceof Plugin && typeof instance[options] === 'function') {
+					instance[options].apply(instance, Array.prototype.slice.call(args, 1));
+				}
+				if (options === 'destroy') {
+					$.data(this, 'plugin_' + pluginName, null);
+				}
+			});
+		}
+	};
+
+	$[pluginName] = function(options) {
+		var $window = $(window);
+		return $window.stellar.apply($window, Array.prototype.slice.call(arguments, 0));
+	};
+
+	//Expose the scroll and position property function hashes so they can be extended
+	$[pluginName].scrollProperty = scrollProperty;
+	$[pluginName].positionProperty = positionProperty;
+
+	//Expose the plugin class so it can be modified
+	window.Stellar = Plugin;
+}(jQuery, window, document));

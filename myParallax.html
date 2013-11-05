@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css" media="all" href="css/animate.css" />
 <script type="text/javascript" src="js/_jquery_1.9.1.js"></script>
 <script type="text/javascript" src="js/library.js"></script>
-<script type="text/javascript" src="js/integrator.js"></script>
+<script type="text/javascript" src="js/parallax.js"></script>
 <script>
 $(function(){
 	$("#myContainer").parallScroll({
@@ -30,6 +30,7 @@ $(function(){
 		showType: function($elem){ $elem.show(); },			//Customise shown
 		refValueW: 1366,	//The reference value of browser width
 		refValueH: 643,		//The reference value of browser height
+		navId: '#navi_bar',	//setting the navigation name to plugin
 		formula: function(a, b){ return Math.round(a / b * 100) / 100; }	//proportional Formula
 	});
 });
@@ -158,6 +159,7 @@ $(function(){
 				<p><b>showType:</b>//Customise shown (def: function($elem){$elem.show()})</p>
 				<p><b>refValueW:</b>//The reference value of browser width (def: $(window).width())</p>
 				<p><b>refValueH:</b>//The reference value of browser height (def: $(window).height())</p>
+				<p><b>navId:</b>//setting the navigation name to plugin (def: '#navi')</p>
 				<p><b>formula:</b>//proportional Formula</p>
 				<p class="animated bounceInDown">For Example : function(a, b){ return Math.round(a / b * 100) / 100; }</p>
 			</div>

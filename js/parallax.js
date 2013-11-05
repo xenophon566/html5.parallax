@@ -3,7 +3,8 @@
 * 
 * @Date 	20130909
 * @Author 	ShawnWu
-* @Version 	release v6.2.20131031
+* @Version 	release v6.4.20131105
+* @License 	under the MIT License
 **/
 jQuery.fn.parallScroll = function(settings) {
 	
@@ -25,10 +26,11 @@ jQuery.fn.parallScroll = function(settings) {
 		showType: function($elem){ $elem.show(); },		//Customise shown
 		refValueW: $(window).width(),	//The reference value of browser width
 		refValueH: $(window).height(),	//The reference value of browser height
+		navId: '#navi',		//setting the navigation name to plugin
 		formula: function(a, b){ return Math.round(a / b * 100) / 100; }	//proportional Formula
 	}, settings);
 	
-	var peoples = new function() {	
+	var parallax = new function() {	
 		
 		// check browser
 		var checkBrowser = function() {
@@ -40,24 +42,22 @@ jQuery.fn.parallScroll = function(settings) {
 		
 		var coreStyle = checkBrowser() + '-transform';
 		
-		var htm = $('html'), elem = $('body'), docuElem = $('html, body'), docu = $(document), win = $(window), navi = $("#navi_bar");
+		var htm = $('html'), elem = $('body'), docuElem = $('html, body'), docu = $(document), win = $(window), navi = $(settings.navId);
 		
 		var bSize = settings.scrollAxis == 'x' ? settings.refValueW : settings.refValueH,
 			bResize = settings.scrollAxis == 'x' ? win.width() : win.height(),
-			bRatio = settings.formula(bResize, bSize),
-			docuSize = settings.scrollAxis == 'x' ? docu.width() * bRatio : docu.height() * bRatio;
+			bRatio = settings.formula(bResize, bSize);
 		
-		settings.scrollAxis == 'x' ? $(this).width(docuSize) : $(this).height(docuSize);
+		win.resize(function(){
+			bResize = settings.scrollAxis == 'x' ? win.width() : win.height();
+			bRatio = settings.formula(bResize, bSize);
+		});
+		
 		settings.scrollLimit *= bRatio; settings.scrollRatio *= bRatio; settings.naviRatio *= bRatio;
 		var bound = settings.scrollAxis == 'x' ? win.width() : win.height();
 		
-		win.resize(function(){ location.reload(); });
-		
-		//peoples initial
-		this.init = function() {
-			//initiate parallax effects
-			peoples.parallax.init_parallax();
-		}
+		//initiate parallax effects starting
+		this.init = function() { parallax.parallax.init_parallax(); }
 		
 		//Handles navigation, scrolling and parallax effects.
 		this.parallax = new function() {
@@ -85,7 +85,10 @@ jQuery.fn.parallScroll = function(settings) {
 					parallaxElements: settings.parallaxE,		//Enable or disable the Elements of parallax
 					hideDistantElements: settings.hideElem,		//Hide parallax elements that move outside the viewport
 					hideElement: settings.hideType,				//Customise hidden
-					showElement: settings.showType				//Customise shown
+					showElement: settings.showType,				//Customise shown
+					refWidth: win.width(),						//Realtime browser width
+					refHeight: win.height(),					//Realtime browser height
+					formula: settings.formula					//Proportional formula
 				});
 				
 				//scroll mousewheel detection
@@ -442,6 +445,6 @@ jQuery.fn.parallScroll = function(settings) {
 		}
 	}
 
-	peoples.init();
+	parallax.init();
 	
 }
