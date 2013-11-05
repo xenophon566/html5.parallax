@@ -21,4 +21,4 @@ mousewheel http://brandonaaron.net, jQuery Easing v1.3, Stellar.js v0.5.0
 HTML5, CSS3, Javascript, JQuery
 
 ####Manual
-operate method as shown in DEMO website
+operate method as shown in <a href="#">DEMO</a> website
