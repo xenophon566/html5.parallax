@@ -15,10 +15,7 @@ $(function(){
 		scrollLimit: 13660,	//right scroll limit (def: 8000)
 		scrollRatio: 500,	//rate ratio of scrolling page (def: 500)
 		naviRatio: 800,		//rate ratio of navigation bar clicked (def: 800)
-		
-		//navigation's id name & starting position
-		naviLocate: { navi_demo: 0, navi_start: 1639, navi_document: 4644, navi_contact: 12040 },
-		
+		naviLocate: { navi_demo: 0, navi_start: 1639, navi_document: 4644, navi_contact: 12040 },	//navi's id & start position
 		scrollAxis: 'x',	//Set scrolling axis (def: 'x')
 		horiScroll: true,	//Set scrolling to be horizontal scrolling (def: true)
 		vertiScroll: false,	//Set scrolling to be vertical scrolling (def: true)
@@ -32,13 +29,12 @@ $(function(){
 		refValueH: 643,		//The reference value of browser height
 		navId: '#navi_bar',	//setting the navigation name to plugin
 		formula: function(a, b){ return Math.round(a / b * 100) / 100; }	//proportional Formula
-	});
+	}, "#myContainer");
 });
 </script>
 </head>
 <body>
 	<div id="myContainer" data-stellar-background-ratio="0.4">
-		
 		<section id="demo">		<!--section demo-->
 			<div class="moon" data-stellar-ratio="-0.1" data-stellar-horizontal-offset="-640"></div>
 			
@@ -417,7 +413,6 @@ $(function(){
 				<li><a href="#" id="navi_contact" class>Contact</a></li>
 			</ul>
 		</div>
-		
 	</div>
 </body>
 </html>

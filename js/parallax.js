@@ -3,18 +3,17 @@
 * 
 * @Date 	20130909
 * @Author 	ShawnWu
-* @Version 	release v6.4.20131105
+* @Version 	release v6.6.20140320
 * @License 	under the MIT License
 **/
-jQuery.fn.parallScroll = function(settings) {
-	
+jQuery.fn.parallScroll = function(settings, selector) {
 	settings = jQuery.extend({
 		useEasing: true,	//boolean to using Easing effect
 		interval: 25,		//interval of scroll page
 		scrollLimit: 8000,	//right scroll limit
 		scrollRatio: 500,	//ratio of scroll page
 		naviRatio: 800,		//ratio of clicked navigation bar
-		naviLocate: {},		//navigation's id name & starting position
+		naviLocate: {},		//navi's id & start position
 		scrollAxis: 'x',	//Set scrolling axis
 		horiScroll: true,	//Enable horizontal effect
 		vertiScroll: true,	//Enable vertical effect
@@ -30,19 +29,15 @@ jQuery.fn.parallScroll = function(settings) {
 		formula: function(a, b){ return Math.round(a / b * 100) / 100; }	//proportional Formula
 	}, settings);
 	
-	var parallax = new function() {	
-		
-		// check browser
-		var checkBrowser = function() {
+	var parallax = new function() {
+		function checkBrowser() {
 			if( navigator.userAgent.search("Firefox") != -1 ) return '-moz';
 			else if( navigator.userAgent.search("MSIE") != -1 ) return '-ms';
 			else if( navigator.userAgent.search("Opera") != -1 ) return '-o';
 			else return '-webkit';
-		}
+		} var coreStyle = checkBrowser() + '-transform';
 		
-		var coreStyle = checkBrowser() + '-transform';
-		
-		var htm = $('html'), elem = $('body'), docuElem = $('html, body'), docu = $(document), win = $(window), navi = $(settings.navId);
+		var win = $(window), docuElem = $('body'), elem = $(selector), navi = $(settings.navId);
 		
 		var bSize = settings.scrollAxis == 'x' ? settings.refValueW : settings.refValueH,
 			bResize = settings.scrollAxis == 'x' ? win.width() : win.height(),
@@ -57,7 +52,7 @@ jQuery.fn.parallScroll = function(settings) {
 		var bound = settings.scrollAxis == 'x' ? win.width() : win.height();
 		
 		//initiate parallax effects starting
-		this.init = function() { parallax.parallax.init_parallax(); }
+		this.init = function() { parallax.parallax.init_parallax() }
 		
 		//Handles navigation, scrolling and parallax effects.
 		this.parallax = new function() {
@@ -67,7 +62,6 @@ jQuery.fn.parallScroll = function(settings) {
 			
 			//Initialize the parallax effects
 			this.init_parallax = function() {
-				
 				var _this = this;
 				
 				//bundling the click event in navigation bar
@@ -92,16 +86,12 @@ jQuery.fn.parallScroll = function(settings) {
 				});
 				
 				//scroll mousewheel detection
-				htm.mousewheel(function(event, delta){
-					//prevent scroll event
-					event.preventDefault();
-					
+				elem.mousewheel(function(event, delta){
+					event.preventDefault(); event.stopPropagation();
 					//calculate new position FOR mousewheel Scrolling
-					_this.scrollPos = _this.scrollPos - delta * settings.interval < 0 ? 0 : _this.scrollPos - delta * settings.interval;
-					
+					_this.scrollPos = _this.scrollPos-delta*settings.interval < 0 ? 0 : _this.scrollPos-delta*settings.interval || 0;
 					//fix the Infinity scroll RIGHT problem
 					_this.scrollPos = _this.scrollPos > settings.scrollLimit ? settings.scrollLimit : _this.scrollPos;
-					
 					//no easing when page has a small delta value
 					if (delta < 1 && delta > -1) _this.useEasing = false;
 					
@@ -109,17 +99,18 @@ jQuery.fn.parallScroll = function(settings) {
 				});
 				
 				//scroll keyboard detection
-				htm.on("keyup keypress keydown", function(event){
+				$(document).on("keyup keypress keydown", elem, function(event){
+					event.stopPropagation();
 					//keyboard arrow detection
-					var delta; if(event.keyCode==37 || event.keyCode==38) delta = 1; if(event.keyCode==39 || event.keyCode==40) delta = -1;
-					
-					//calculate new position FOR keyboard Scrolling
-					_this.scrollPos = _this.scrollPos - delta * settings.interval < 0 ? 0 : _this.scrollPos - delta * settings.interval;
-					
-					//fix the Infinity scroll RIGHT problem
-					_this.scrollPos = _this.scrollPos > settings.scrollLimit ? settings.scrollLimit : _this.scrollPos;
-					
-					_this.scrollEasing(_this.useEasing);
+					if(event.keyCode==37 || event.keyCode==38) var delta = 1; if(event.keyCode==39 || event.keyCode==40) var delta = -1;
+					var keyCodeArr = [37, 38, 39, 40]; if( !!~keyCodeArr.indexOf(event.keyCode) ) {
+						//calculate new position FOR keyboard Scrolling
+						_this.scrollPos = _this.scrollPos-delta*settings.interval < 0 ? 0 : _this.scrollPos-delta*settings.interval || 0;
+						//fix the Infinity scroll RIGHT problem
+						_this.scrollPos = _this.scrollPos > settings.scrollLimit ? settings.scrollLimit : _this.scrollPos;
+						
+						_this.scrollEasing(_this.useEasing);
+					}
 				});
 				
 				_this.scrollEasing = function(useEasing) {
@@ -128,12 +119,12 @@ jQuery.fn.parallScroll = function(settings) {
 						var scrollTmp = 0;
 						if( settings.scrollAxis == 'x' ) {
 							docuElem.stop(true, false).animate({scrollLeft: _this.scrollPos}, {duration: settings.scrollRatio, step: function() {
-								var tmpScroll = htm.scrollLeft() ? htm.scrollLeft() : elem.scrollLeft();
+								var tmpScroll = docuElem.scrollLeft() ? docuElem.scrollLeft() : elem.scrollLeft();
 								if( tmpScroll != scrollTmp ) { _this.scrollUpdate(tmpScroll); scrollTmp = tmpScroll; }
 							} });
 						} else {
 							docuElem.stop(true, false).animate({scrollTop: _this.scrollPos}, {duration: settings.scrollRatio, step: function() {
-								var tmpScroll = htm.scrollLeft() ? htm.scrollLeft() : elem.scrollLeft();
+								var tmpScroll = docuElem.scrollLeft() ? docuElem.scrollLeft() : elem.scrollLeft();
 								if( tmpScroll != scrollTmp ) { _this.scrollUpdate(tmpScroll); scrollTmp = tmpScroll; }
 							} });
 						}
@@ -148,12 +139,11 @@ jQuery.fn.parallScroll = function(settings) {
 			//trigger the animation events depending on the scroll position
 			this.scrollUpdate = function(scrollPx, iScrollEnd, noneNavi) {
 				this.aniHandler(scrollPx);					//animation trigger
-				if( !noneNavi ) this.naviScroll(scrollPx);	//handle the navigation bar in scroll
+				if(!noneNavi) this.naviScroll(scrollPx);	//handle the navigation bar in scroll
 			}
 			
 			//animation handler
 			this.aniHandler = function(scrollPx) {
-
 				var scrollDirect = this.scrollPos;
 				
 				if( scrollPx >= _isNaviClick * bRatio - 5 && scrollPx <= _isNaviClick * bRatio + 5 ) _isNaviClick = 0;
@@ -180,7 +170,7 @@ jQuery.fn.parallScroll = function(settings) {
 					}
 					
 					$(this).data("init-rotate", {"rotate":rotate});
-				});/**/
+				});/*rotate*/
 				
 				 //scale image action
 				elem.find('[data-scale]').each(function(){
@@ -222,7 +212,7 @@ jQuery.fn.parallScroll = function(settings) {
 					}
 					
 					dist /= bRatio; $(this).data("init-scale", {"dist":dist, "scale":scale});
-				});/**/
+				});/*scale*/
 			
 				 //multiple image action
 				elem.find('[data-frame]').each(function(){
@@ -272,7 +262,7 @@ jQuery.fn.parallScroll = function(settings) {
 						fNow = fNext;
 						dist /= bRatio; $(this).data("init-frame", {"dist":dist, "now":fNow, "next":fNext});
 					}
-				});/**/
+				});/*multiple*/
 				
 				 //mask image action
 				elem.find('[data-mask]').each(function(){
@@ -321,7 +311,7 @@ jQuery.fn.parallScroll = function(settings) {
 					
 					myMask.css({"width":maskW, "height":maskH});
 					dist /= bRatio; $(this).data("init-mask", {"dist":dist});
-				});/**/
+				});/*mask*/
 				
 				 //CSS sprite action
 				elem.find('[data-sprite]').each(function(){
@@ -343,7 +333,7 @@ jQuery.fn.parallScroll = function(settings) {
 					}
 					
 					$(this).css("background-position", spriteX + 'px' + ' ' + spriteY + 'px');
-				});/**/
+				});/*sprite*/
 				
 				 //move image action
 				elem.find('[data-move]').each(function(){
@@ -378,7 +368,7 @@ jQuery.fn.parallScroll = function(settings) {
 					
 					(settings.scrollAxis == 'x') ? $(this).parent().css("top", move) : $(this).parent().css("left", move);
 					dist /= bRatio; move /= bRatio; $(this).data("init-move", {"dist":dist, "posi":move});
-				});/**/
+				});/*move*/
 				
 				 //CSS3 animated action
 				elem.find('[data-animated]').each(function(){
@@ -389,7 +379,7 @@ jQuery.fn.parallScroll = function(settings) {
 					if( scrollPx > sdist && scrollPx < sdist+edist ) $(this).addClass("animated " + css3);
 					else if( scrollPx > sdist+edist ) $(this).removeClass("animated " + css3);
 					else $(this).removeClass("animated " + css3);
-				});/**/
+				});/*animated*/
 			}
 			
 			//handle the STYLE of navigation bar in scrolling page
@@ -417,7 +407,6 @@ jQuery.fn.parallScroll = function(settings) {
 			
 			//handle the CLICK event of navigation bar
 			this.naviClick = function(naviId) {
-				
 				var _this = this;
 				
 				//get the active item then remove & active item when clicked the navigation bar
@@ -426,17 +415,19 @@ jQuery.fn.parallScroll = function(settings) {
 				
 				//animation action handle when clicked the navigation bar
 				if( settings.scrollAxis == 'x' ) {
-					docuElem.stop(true, true).animate({scrollLeft:this.naviLoc[naviId] * bRatio},{duration:settings.naviRatio, step:naviUpdate, complete:naviUpdate});
+					docuElem.stop(true, true).animate({scrollLeft: this.naviLoc[naviId]*bRatio}, {duration: settings.naviRatio, step: naviUpdate, complete: naviUpdate});
 				} else {
-					docuElem.stop(true, true).animate({scrollTop:this.naviLoc[naviId] * bRatio},{duration:settings.naviRatio, step:naviUpdate, complete:naviUpdate});
+					docuElem.stop(true, true).animate({scrollTop: this.naviLoc[naviId]*bRatio}, {duration: settings.naviRatio, step: naviUpdate, complete: naviUpdate});
 				}
+				
 				function naviUpdate() {
 					//get the position when click the navigation bar
 					if( settings.scrollAxis == 'x' ) {
-						var tmpScroll = (htm.scrollLeft() == 0 && elem.scrollLeft() != 0) ? elem.scrollLeft() : htm.scrollLeft();
+						var tmpScroll = (docuElem.scrollLeft() == 0 && elem.scrollLeft() != 0) ? elem.scrollLeft() : docuElem.scrollLeft();
 					} else {
-						var tmpScroll = (htm.scrollTop() == 0 && elem.scrollTop() != 0) ? elem.scrollTop() : htm.scrollTop();
+						var tmpScroll = (docuElem.scrollTop() == 0 && elem.scrollTop() != 0) ? elem.scrollTop() : docuElem.scrollTop();
 					}
+					
 					//move to target page
 					_this.scrollPos = tmpScroll;
 					_this.scrollUpdate(tmpScroll, false, true);
@@ -446,5 +437,4 @@ jQuery.fn.parallScroll = function(settings) {
 	}
 
 	parallax.init();
-	
 }
