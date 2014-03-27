@@ -21,8 +21,8 @@ jQuery.fn.parallScroll = function(settings, selector) {
 		parallaxB: true,	//Enable or disable the Backgrounds of parallax
 		parallaxE: true,	//Enable or disable the Elements of parallax
 		hideElem: true,		//Hide parallax elements that move outside the viewport
-		hideType: function($elem){ $elem.hide(); },		//Customise hidden
-		showType: function($elem){ $elem.show(); },		//Customise shown
+		hideType: function($elem){ $elem.hide() },		//Customise hidden
+		showType: function($elem){ $elem.show() },		//Customise shown
 		refValueW: $(window).width(),	//The reference value of browser width
 		refValueH: $(window).height(),	//The reference value of browser height
 		navId: '#navi',		//setting the navigation name to plugin
@@ -31,9 +31,9 @@ jQuery.fn.parallScroll = function(settings, selector) {
 	
 	var parallax = new function() {
 		function checkBrowser() {
-			if( navigator.userAgent.search("Firefox") != -1 ) return '-moz';
-			else if( navigator.userAgent.search("MSIE") != -1 ) return '-ms';
-			else if( navigator.userAgent.search("Opera") != -1 ) return '-o';
+			if( !!~navigator.userAgent.toLowerCase().search("firefox") ) return '-moz';
+			else if( !!~navigator.userAgent.toLowerCase().search("msie") ) return '-ms';
+			else if( !!~navigator.userAgent.toLowerCase().search("opera") ) return '-o';
 			else return '-webkit';
 		} var coreStyle = checkBrowser() + '-transform';
 		
