@@ -1,18 +1,14 @@
-Html5 parallax
+Html5 Parallax
 =========
 
-### Html5.parallax project under the MIT License
-
-#### Name 
-Html5.parallax
+### Html5.parallax project
 
 #### Type 
-Plugin
+Frontend Plugin
 
 #### Feature 
-1. Frontend plugin to show your own website animate effects.
-2. Easy to set parameters.
-3. Easy to operate.
+1. Frontend element controller.
+2. Easy to use.
 
 #### Base on
 HTML5, CSS3, Javascript, JQuery
