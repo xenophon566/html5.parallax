@@ -3,6 +3,9 @@ Html5 Parallax
 
 ### Html5.parallax project
 
+#### Describe
+Parallax is a Frontend plugin.
+
 #### Type 
 Frontend Plugin
 
