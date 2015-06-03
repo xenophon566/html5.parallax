@@ -25,7 +25,8 @@
 <h1>
 <a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Getting Started</h1>
 
-<p>html5.parallax.js is a Jquery Plugin base on HTML5. It with Stellar, Mousewheel and Easing to make a customized scrolling animation. Combined the CSS3 effect to go to accomplish what you need a parallax scrolling effect.</p>
+<h3>
+<a id="setting-parameters" class="anchor" href="#setting-parameters" aria-hidden="true"><span class="octicon octicon-link"></span></a>setting parameters</h3>
 
 <div><pre>
 $("#myContainer").parallScroll({
@@ -51,10 +52,39 @@ $("#myContainer").parallScroll({
 }, "#myContainer");
 </pre></div>
 
+<h3>
+<a id="startup" class="anchor" href="#startup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Startup</h3>
+
+<p></p><div><pre>
+<code>$("body").parallScroll(); //Start in a Tag</code> <br>
+<code>$("#myContainer").parallScroll(settings, selector); //Start the plugin</code> <br>
+<code>settings = Plugin setting selector = Element name</code> <br>
+</pre></div>
+
 <h1>
 <a id="document" class="anchor" href="#document" aria-hidden="true"><span class="octicon octicon-link"></span></a>Document</h1>
 
-<p><br><br></p>
+<h3>
+<a id="parallax-elements-setting" class="anchor" href="#parallax-elements-setting" aria-hidden="true"><span class="octicon octicon-link"></span></a>parallax elements setting</h3>
+
+<p></p><div><pre>
+<code>&lt;div data-stellar-ratio="1" data-animated='{"sdist":"0", "edist":"100", "css3":"swing"}'&gt;</code> <br>
+    <code>&lt;div data-frame='{"sdist":"0", "edist":"100", "speed":"100"}'&gt;&lt;/div&gt;</code> <br>
+    <code>&lt;img src="Frame.png"/&gt; //Element Image</code> <br>
+<code>&lt;/div&gt;</code> <br>
+</pre></div>
+
+<h3>
+<a id="including" class="anchor" href="#including" aria-hidden="true"><span class="octicon octicon-link"></span></a>Including</h3>
+
+<ol>
+<li>Rotate Action</li>
+<li>Scale Action</li>
+<li>Frame Action</li>
+<li>Mask Action</li>
+<li>CSS Sprite Action</li>
+<li>Move Action</li>
+</ol>
 
 <h1>
 <a id="html5-parallax" class="anchor" href="#html5-parallax" aria-hidden="true"><span class="octicon octicon-link"></span></a>Html5 Parallax</h1>
