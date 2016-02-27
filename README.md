@@ -19,5 +19,5 @@ c. Stellar.js v0.5.0
 #### Base on
 HTML5, CSS3, Javascript, JQuery
 
-####License
+#### License
 under the MIT License <p>Copyright (c) {{2013 Shawn Wu}}</p>
