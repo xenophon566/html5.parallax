@@ -1,23 +1,18 @@
-Html5.parallax Project
+Html5.parallax
 =========
 
-#### Type
-Frontend Plugin
+##### Describe
+Parallax scrolling effects on your project
 
-#### Describe
-A frontend Plugin for Parallax scrolling, set element parameter from web page directly.
+##### Features
+1. Set element by data attribute (data-*)
+2. Rotate, Scale etc. actions supports
 
-#### Feature
-1. Set element action from HTML (data-*)
-2. Horizontal and Vertical scroll supports
+##### Including
+Stellar.js [markdalgleish](http://markdalgleish.com/projects/stellar.js/)
 
-#### Include
-a. Mousewheel
-b. jQuery Easing v1.3
-c. Stellar.js v0.5.0
+##### Base on
+HTML5, CSS3
 
-#### Base on
-HTML5, CSS3, Javascript, JQuery
-
-#### License
-under the MIT License <p>Copyright (c) {{2013 Shawn Wu}}</p>
+##### License
+under the MIT License Copyright (c) {{2013 Shawn Wu}}
