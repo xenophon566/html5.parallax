@@ -1,387 +1,513 @@
 /**
 * My Parallax Plugin
-* 
+*
 * @Date 	20130909
 * @Author 	ShawnWu
 * @Version 	release v6.4.20131105
 * @License 	under the MIT License
 **/
-@media screen and (min-height:600px) { * { font-size: 100%; font-family: cursive, 'Comic Sans MS', serif; } }
-@media screen and (max-height:600px) { * { font-size: 96%; font-family: cursive, 'Comic Sans MS', serif; } }
-@media screen and (max-height:400px) { * { font-size: 45%; font-family: cursive, 'Comic Sans MS', serif; } }
 
-h1 { font-size: 1.5em; }
-h2 { font-size: 1.3em; }
-h3 { font-size: 1.1em; }
+@media screen and (min-height:600px) {
+    * {
+        font-size: 100%;
+        font-family: cursive, 'Comic Sans MS', serif;
+    }
+}
+
+@media screen and (max-height:600px) {
+    * {
+        font-size: 96%;
+        font-family: cursive, 'Comic Sans MS', serif;
+    }
+}
+
+@media screen and (max-height:400px) {
+    * {
+        font-size: 45%;
+        font-family: cursive, 'Comic Sans MS', serif;
+    }
+}
+
+h1 {
+    font-size: 1.5em;
+}
+
+h2 {
+    font-size: 1.3em;
+}
+
+h3 {
+    font-size: 1.1em;
+}
 
 body {
-	background: rgba(62, 2, 95, 0.74);
-	width: 100%; height: 100%;
-	overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: rgba(62, 2, 95, 0.74);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 #myContainer {
-    background:url(../images/city1.png) repeat-x 0 100%; background-size: 36% 26%;
-	background-attachment: fixed;
-	margin-left: -1%;
-	width: 1000%;
-	height: 100%;
+    background: url(../images/city1.png) repeat-x 0 100%;
+    background-size: 36% 26%;
+    background-attachment: fixed;
+    margin-left: -1%;
+    width: 1000%;
+    height: 100%;
 }
 
 section#demo {
-	position: relative;
-	width: 12%; height: 100%;
-	float: left;
-	display: inline;
+    position: relative;
+    width: 12%;
+    height: 100%;
+    float: left;
+    display: inline;
 }
 
 section#start {
-	position: relative;
-	width: 22%; height: 100%;
-	float: left;
-	display: inline;
+    position: relative;
+    width: 22%;
+    height: 100%;
+    float: left;
+    display: inline;
 }
 
 section#document {
-	position: relative;
-	width: 60%; height: 100%;
-	float: left;
-	display: inline;
+    position: relative;
+    width: 60%;
+    height: 100%;
+    float: left;
+    display: inline;
 }
 
 section#contact {
-	position: relative;
-	width: 6%; height: 100%;
-	float: left;
-	display: inline;
+    position: relative;
+    width: 6%;
+    height: 100%;
+    float: left;
+    display: inline;
 }
 
 #navi_bar {
     background: #000;
     position: fixed;
-    left: 0; top: 0;
-    width: 100%; height: 10%;
-	z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 10;
 }
 
 #navi_bar li {
-	display: inline;
-	padding: 0 2%;
+    display: inline;
+    padding: 0 2%;
 }
 
 #navi_bar li a {
-	color: #ddd;
-	font-size: 1.4em;
-	letter-spacing: 1px;
-	text-decoration: none;
+    color: #ddd;
+    font-size: 1.4em;
+    letter-spacing: 1px;
+    text-decoration: none;
 }
 
-#navi_bar li a:hover, #navi_bar li a.active {
-	color: #D50C0C;
+#navi_bar li a:hover,
+#navi_bar li a.active {
+    color: #D50C0C;
 }
 
 .moon {
-	background: url(../images/moon.png) no-repeat; background-size: 100% 100%;
-	position: fixed;
-	left:5%; top: 7%;
-	width: 11%; height: 22%;
-	z-index: 12;	
+    background: url(../images/moon.png) no-repeat;
+    background-size: 100% 100%;
+    position: fixed;
+    left: 5%;
+    top: 7%;
+    width: 8%;
+    padding-top: 7.5%;
+    z-index: 12;
 }
 
 .textbox {
-	background: -webkit-linear-gradient(top, #FFF, #666);
-	background: -moz-linear-gradient(top, #FFF, #666);
-	background: -ms-linear-gradient(top, #FFF, #666);
-	background: -o-linear-gradient(top, #FFF, #666);
-	border: 1px solid #333;
-	border-radius: 6px;
-	-moz-box-shadow: 6px 6px 12px #000;
-	-webkit-box-shadow: 6px 6px 12px #000;
-	box-shadow: 6px 6px 12px #000;
-	margin: 4% 0;
-	padding: 0 4%;
+    background: -webkit-linear-gradient(top, #FFF, #666);
+    background: -moz-linear-gradient(top, #FFF, #666);
+    background: -ms-linear-gradient(top, #FFF, #666);
+    background: -o-linear-gradient(top, #FFF, #666);
+    border: 1px solid #333;
+    border-radius: 6px;
+    -moz-box-shadow: 6px 6px 12px #000;
+    -webkit-box-shadow: 6px 6px 12px #000;
+    box-shadow: 6px 6px 12px #000;
+    margin: 4% 0;
+    padding: 0 4%;
 }
 
 .mylink a {
-	font-weight: bold;
-	text-decoration: none;
-	color: inherit;
+    font-weight: bold;
+    text-decoration: none;
+    color: inherit;
 }
 
 /*section demo*/
+
 .action {
-	position: fixed;
-	left: 1%; top: 84%;
-	width: 100%; height: 14%;
-	z-index: 20;
+    position: fixed;
+    left: 1%;
+    top: 84%;
+    width: 100%;
+    z-index: 20;
 }
 
 .record {
-	position: absolute;
-	left: 36%; top: 68%;
-	height: 10%;
-	z-index: 5;
+    position: absolute;
+    left: 36%;
+    top: 68%;
+    height: 10%;
+    z-index: 5;
 }
 
 .superman {
-	position: absolute;
-	left: -4%; top: 22%;
-	height: 4%;
-	z-index: 20;
+    position: absolute;
+    left: -4%;
+    top: 22%;
+    height: 4%;
+    z-index: 20;
 }
 
 .peace_b {
-	position: fixed;
-	left: 16%; top: 64%;
-	width: 86%; height: 14%;
-	z-index: 4;
+    position: fixed;
+    left: 16%;
+    top: 64%;
+    width: 86%;
+    height: 14%;
+    z-index: 4;
 }
 
 .bats {
-	position: absolute;
-	left: 42%; top: 92%;
-	height: 18%;
-	z-index: -1;
+    position: absolute;
+    left: 42%;
+    top: 92%;
+    height: 14%;
+    z-index: -1;
 }
 
 .cross {
-	position: absolute;
-	left: 62%; top: 0%;
-	height: 12%;
-	z-index: 6;
+    position: absolute;
+    left: 62%;
+    top: 0%;
+    height: 12%;
+    z-index: 6;
 }
 
 .pumpkin {
-	background: url(../images/pumpkin.png) no-repeat; background-size: 100% 100%;
-	position: absolute;
-	left: 74%; bottom: 0;
-	width: 4%; height: 8%;
-	z-index: 5;
+    background: url(../images/pumpkin.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 74%;
+    bottom: 0;
+    width: 4.5%;
+    padding-top: 4.5%;
+    z-index: 5;
 }
 
 .shuriken {
-	position: absolute;
-	left: 80%; top: 74%;
-	width: 100%; height: 14%;
-	z-index: 10;
+    position: absolute;
+    left: 80%;
+    top: 74%;
+    width: 100%;
+    height: 14%;
+    z-index: 10;
 }
 
 .music_5 {
-	position: absolute;
-	left: 52%; top: 58%;
-	height: 4%;
-	z-index: 6;
+    position: absolute;
+    left: 52%;
+    top: 58%;
+    height: 4%;
+    z-index: 6;
 }
 
 .music_1 {
-	background: url(../images/music_1.png) no-repeat; background-size: 100% 100%;
-	position: absolute;
-	left: 42%; top: 60%;
-	width: 2%; height: 8%;
-	z-index: 6;
+    background: url(../images/music_1.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 42%;
+    top: 60%;
+    width: 2%;
+    height: 8%;
+    z-index: 6;
 }
 
 .music_3 {
-	background: url(../images/music_3.png) no-repeat;
-	background-size: 100% 100%;
-	position: absolute;
-	left: 58%; top: 64%;
-	width: 2%; height: 6%;
-	z-index: 6;
+    background: url(../images/music_3.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 58%;
+    top: 64%;
+    width: 2%;
+    height: 6%;
+    z-index: 6;
 }
 
 .music_7 {
-	background: url(../images/music_7.png) no-repeat; background-size: 100% 100%;
-	position: absolute;
-	left: 56%; top: 38%;
-	width: 4%; height: 8%;
-	z-index: 6;
+    background: url(../images/music_7.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 56%;
+    top: 38%;
+    width: 4%;
+    height: 8%;
+    z-index: 6;
 }
 
 .music_9 {
-	background: url(../images/music_9.png) no-repeat; background-size: 100% 100%;
-	position: absolute;
-	left: 44%; top: 48%;
-	width: 6%; height: 12%;
-	z-index: 6;
+    background: url(../images/music_9.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 44%;
+    top: 48%;
+    width: 6%;
+    height: 12%;
+    z-index: 6;
 }
 
 /*section start*/
+
 .start {
-	position: absolute;
-	top: 8%;
-	width: 25%;
-	z-index: 15;
+    position: absolute;
+    top: 8%;
+    width: 25%;
+    z-index: 15;
 }
 
 .supermanfall {
-	background: url(../images/superman.png) no-repeat; background-size: 100% 100%;
-	position: absolute;
-	left: 26%; top: 14%;
-	width: 5%; height: 12%;
-	z-index: 20;	
+    background: url(../images/superman.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 26%;
+    top: 14%;
+    width: 5%;
+    height: 12%;
+    z-index: 20;
 }
 
 .music_11 {
-	background: url(../images/music_11.png) no-repeat; background-size: 100% 100%;
-	position: absolute;
-	left: 48%; top: 60%;
-	width: 2%; height: 8%;
-	z-index: 6;
+    background: url(../images/music_11.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 48%;
+    top: 60%;
+    width: 2%;
+    height: 8%;
+    z-index: 6;
 }
 
 .pumpkinfall {
-	background: url(../images/pumpkin.png) no-repeat; background-size: 100% 100%;
-	position: absolute;
-	left: 64%; bottom: 0;
-	width: 2%; height: 8%;
-	z-index: 5;
+    background: url(../images/pumpkin.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 64%;
+    bottom: 0;
+    width: 2%;
+    height: 8%;
+    z-index: 5;
 }
 
 .blackman {
-	background: url(../images/blackman.png) no-repeat; background-size: 100% 100%;
-	position: absolute;
-	left: 62%; bottom: 0;
-	width: 2%; height: 12%;
-	z-index: 5;
+    background: url(../images/blackman.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 62%;
+    bottom: 0;
+    width: 2%;
+    height: 12%;
+    z-index: 5;
 }
 
 /*section document*/
+
 .document {
-	position: absolute;
-	top: 8%;
-	width: 10%;
-	z-index: 15;
+    position: absolute;
+    top: 8%;
+    width: 10%;
+    z-index: 15;
 }
 
-.supermanback {	
-	background: url(../images/superman.png) no-repeat; background-size: 100% 100%;
-	position: absolute;
-	left: 38%; top: 66%;
-	width: 2%; height: 12%;
-	z-index: 20;
-	-webkit-transform: scale(-1,1);
-	-moz-transform: scale(-1,1);
-	-ms-transform: scale(-1,1);
-	-o-transform: scale(-1,1);
+.supermanback {
+    background: url(../images/superman.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 38%;
+    top: 66%;
+    width: 2%;
+    height: 12%;
+    z-index: 20;
+    -webkit-transform: scale(-1, 1);
+    -moz-transform: scale(-1, 1);
+    -ms-transform: scale(-1, 1);
+    -o-transform: scale(-1, 1);
 }
 
 .death {
-	background: url(../images/death.png) no-repeat; background-size: 100% 100%;
-	position: absolute;
-	left: 56%; bottom: 10%;
-	width: 2%; height: 16%;
-	z-index: 20;
+    background: url(../images/death.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 56%;
+    bottom: 10%;
+    width: 2%;
+    height: 16%;
+    z-index: 20;
 }
 
 .girl {
-	background: url(../images/girl.png) no-repeat; background-size: 50% 50%;
-	position: absolute;
-	left: 100%; bottom: 24%;
-	width: 2%; height: 18%;
-	z-index: 6;
+    background: url(../images/girl.png) no-repeat;
+    background-size: 50% 50%;
+    position: absolute;
+    left: 100%;
+    bottom: 24%;
+    width: 2%;
+    height: 18%;
+    z-index: 6;
 }
 
 .boy {
-	background: url(../images/boy.png) no-repeat; background-size: 100% 100%;
-	position: absolute;
-	left: 100%; bottom: 24%;
-	width: 2%; height: 18%;
-	z-index: 6;
+    background: url(../images/boy.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 100%;
+    bottom: 24%;
+    width: 2%;
+    height: 18%;
+    z-index: 6;
 }
 
 .music_12 {
-	background: url(../images/music_12.png) no-repeat; background-size: 30% 30%;
-	position: absolute;
-	left: 84%; bottom: 24%;
-	width: 4%; height: 28%;
-	z-index: 6;
+    background: url(../images/music_12.png) no-repeat;
+    background-size: 30% 30%;
+    position: absolute;
+    left: 84%;
+    bottom: 24%;
+    width: 4%;
+    height: 28%;
+    z-index: 6;
 }
 
 .batsfadeout {
-	background: url(../images/bats.png) no-repeat; background-size: 80% 80%;
-	position: absolute;
-	left: 42%; bottom: 18%;
-	width: 2%; height: 20%;
-	z-index: 10;
+    background: url(../images/bats.png) no-repeat;
+    background-size: 80% 80%;
+    position: absolute;
+    left: 42%;
+    bottom: 18%;
+    width: 2%;
+    height: 20%;
+    z-index: 10;
 }
 
 .music_2 {
-	background: url(../images/music_2.png) no-repeat; background-size: 100% 100%;
-	position: absolute;
-	left: 28%; top: 32%;
-	width: 2%; height: 36%;
-	z-index: 0;
+    background: url(../images/music_2.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 28%;
+    top: 32%;
+    width: 2%;
+    height: 36%;
+    z-index: 0;
 }
 
 .music_4 {
-	background: url(../images/music_4.png) no-repeat; background-size: 100% 100%;
-	position: absolute;
-	left: 56%; top: 44%;
-	width: 1%; height: 28%;
-	z-index: 0;
+    background: url(../images/music_4.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 56%;
+    top: 44%;
+    width: 1%;
+    height: 28%;
+    z-index: 0;
 }
 
 .music_6 {
-	background: url(../images/music_6.png) no-repeat; background-size: 100% 100%;
-	position: absolute;
-	left: 84%; top: 44%;
-	width: 0.5%; height: 12%;
-	z-index: 0;
+    background: url(../images/music_6.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 84%;
+    top: 44%;
+    width: 0.5%;
+    height: 12%;
+    z-index: 0;
 }
 
 .music_8 {
-	background: url(../images/music_8.png) no-repeat; background-size: 100% 100%;
-	position: absolute;
-	left: 96%; top: 44%;
-	width: 2%; height: 24%;
-	z-index: 0;
+    background: url(../images/music_8.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 96%;
+    top: 44%;
+    width: 2%;
+    height: 24%;
+    z-index: 0;
 }
 
 .music_10 {
-	background: url(../images/music_10.png) no-repeat; background-size: 100% 100%;
-	position: absolute;
-	left: 92%; top: 48%;
-	width: 6%; height: 28%;
-	z-index: 0;
+    background: url(../images/music_10.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 92%;
+    top: 48%;
+    width: 6%;
+    height: 28%;
+    z-index: 0;
 }
 
 /*section contact*/
+
 .contact {
-	position: absolute;
-	left: 1%; top: 8%;
-	width: 100%;
-	z-index: 15;
+    position: absolute;
+    left: 1%;
+    top: 8%;
+    width: 100%;
+    z-index: 15;
 }
 
 .batsfadeoutlast {
-	background: url(../images/bats.png) no-repeat; background-size: 80% 80%;
-	position: absolute;
-	left: 34%; bottom: 16%;
-	width: 16%; height: 20%;
-	z-index: 10;
+    background: url(../images/bats.png) no-repeat;
+    background-size: 80% 80%;
+    position: absolute;
+    left: 34%;
+    bottom: 16%;
+    width: 16%;
+    height: 20%;
+    z-index: 10;
 }
 
 .deathlast {
-	background: url(../images/death.png) no-repeat; background-size: 100% 100%;
-	position: absolute;
-	left: 53%; top: 16%;
-	width: 14%; height: 16%;
-	z-index: 20;
+    background: url(../images/death.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 53%;
+    top: 16%;
+    width: 14%;
+    height: 16%;
+    z-index: 20;
 }
 
 .pumpkinlast {
-	background: url(../images/pumpkin.png) no-repeat; background-size: 100% 100%;
-	position: absolute;
-	left: 56%; bottom: 0;
-	width: 6%; height: 8%;
-	z-index: 5;
+    background: url(../images/pumpkin.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 56%;
+    bottom: 0;
+    width: 6%;
+    height: 8%;
+    z-index: 5;
 }
 
 .music_11_last {
-	background: url(../images/music_11.png) no-repeat; background-size: 100% 100%;
-	position: absolute;
-	left: 40%; top: 48%;
-	width: 16%; height: 12%;
-	z-index: 6;
+    background: url(../images/music_11.png) no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    left: 40%;
+    top: 48%;
+    width: 16%;
+    height: 12%;
+    z-index: 6;
 }

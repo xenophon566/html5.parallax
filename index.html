@@ -5,44 +5,44 @@
     <title>My Parallax</title>
     <link rel="stylesheet" type="text/css" media="all" href="css/myStyle.css" />
     <link rel="stylesheet" type="text/css" media="all" href="css/animate.css" />
-    <script type="text/javascript" src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="js/_jquery-2.0.3.min.js"></script>
     <script type="text/javascript" src="js/library.js"></script>
-    <script type="text/javascript" src="js/parallax.min.js"></script>
+    <script type="text/javascript" src="js/parallax.js"></script>
     <script>
-    $(function() {
-        $("#myContainer").parallScroll({
-            useEasing: true, //boolean to using Easing effect (def: true)
-            interval: 35, //interval of scrolling page (def: 25)
-            scrollLimit: 13660, //right scroll limit (def: 8000)
-            scrollRatio: 500, //rate ratio of scrolling page (def: 500)
-            naviRatio: 800, //rate ratio of navigation bar clicked (def: 800)
-            naviLocate: {
-                navi_demo: 0,
-                navi_start: 1639,
-                navi_document: 4644,
-                navi_contact: 12040
-            }, //navi's id & start position
-            scrollAxis: 'x', //Set scrolling axis (def: 'x')
-            horiScroll: true, //Set scrolling to be horizontal scrolling (def: true)
-            vertiScroll: false, //Set scrolling to be vertical scrolling (def: true)
-            response: false, //Refreshes parallax content on window load and resize (def: false)
-            parallaxB: true, //Enable or disable the Backgrounds of parallax (def: true)
-            parallaxE: true, //Enable or disable the Elements of parallax (def: true)
-            hideElem: true, //Hide parallax elements that move outside the viewport (def: true)
-            hideType: function($elem) {
-                $elem.fadeOut();
-            }, //Customise hidden
-            showType: function($elem) {
-                $elem.show();
-            }, //Customise shown
-            refValueW: 1366, //The reference value of browser width
-            refValueH: 643, //The reference value of browser height
-            navId: '#navi_bar', //setting the navigation name to plugin
-            formula: function(a, b) {
+        $(function () {
+            $("#myContainer").parallScroll({
+                useEasing: true, //boolean to using Easing effect (def: true)
+                interval: 35, //interval of scrolling page (def: 25)
+                scrollLimit: 13660, //right scroll limit (def: 8000)
+                scrollRatio: 500, //rate ratio of scrolling page (def: 500)
+                naviRatio: 800, //rate ratio of navigation bar clicked (def: 800)
+                naviLocate: {
+                    navi_demo: 0,
+                    navi_start: 1639,
+                    navi_document: 4644,
+                    navi_contact: 12040
+                }, //navi's id & start position
+                scrollAxis: 'x', //Set scrolling axis (def: 'x')
+                horiScroll: true, //Set scrolling to be horizontal scrolling (def: true)
+                vertiScroll: false, //Set scrolling to be vertical scrolling (def: true)
+                response: false, //Refreshes parallax content on window load and resize (def: false)
+                parallaxB: true, //Enable or disable the Backgrounds of parallax (def: true)
+                parallaxE: true, //Enable or disable the Elements of parallax (def: true)
+                hideElem: true, //Hide parallax elements that move outside the viewport (def: true)
+                hideType: function ($elem) {
+                    $elem.fadeOut();
+                }, //Customise hidden
+                showType: function ($elem) {
+                    $elem.show();
+                }, //Customise shown
+                refValueW: 1366, //The reference value of browser width
+                refValueH: 643, //The reference value of browser height
+                navId: '#navi_bar', //setting the navigation name to plugin
+                formula: function (a, b) {
                     return Math.round(a / b * 100) / 100;
                 } //proportional Formula
-        }, "#myContainer");
-    });
+            }, "#myContainer");
+        });
     </script>
 </head>
 
@@ -50,13 +50,15 @@
     <div id="myContainer" data-stellar-background-ratio="0.4">
         <section id="demo">
             <!--section demo-->
-            <div class="moon" data-stellar-ratio="-0.1" data-stellar-horizontal-offset="-640"></div>
+            <div class="moon" data-stellar-ratio="-0.1" data-stellar-horizontal-offset="-640">
+                <div style="padding-top:10%;"></div>
+            </div>
             <div class="action animated bounce" data-stellar-ratio="0">
                 <div data-init-rotate='{"rotate":"0"}' data-rotate='{"speed":"8", "direct":"1"}'>
                 </div>
-                <img src="images/action.png" style="height:100%;" />
+                <img src="images/action.png" style="height:15%;" />
             </div>
-            <div class="record" data-stellar-ratio="0.6">
+            <div class="record" data-stellar-ratio="0.6" style="height:10%;">
                 <div data-init-frame='{"dist":"0","now":"0","next":"0"}' data-frame='{"sdist":"0", "speed":"400"}'>
                 </div>
                 <img src="images/record/record1.png" style="height:100%; display:block;">
@@ -115,7 +117,8 @@
                     <br>
                 </p>
                 <p>
-                    First, we need to setting <b> $(element).parallScroll() </b> against the element.
+                    First, we need to setting
+                    <b> $(element).parallScroll() </b> against the element.
                 </p>
                 <div class="textbox" style="width:80%;">
                     <blockquote>
@@ -141,39 +144,62 @@
             </div>
             <div class="start" data-stellar-ratio="1" style="left: 26%;">
                 <h3 class="animated bounceInUp">element.parallScroll ({ parameter setting })</h3>
-                <p><b>useEasing:</b>//boolean to using Easing effect (def: true)</p>
-                <p><b>interval:</b>//interval of scrolling page (def: 25)</p>
-                <p><b>scrollLimit:</b>//right scroll limit (def: 8000)</p>
-                <p><b>scrollRatio:</b>//rate ratio of scrolling page (def: 500)</p>
-                <p><b>naviRatio:</b>//rate ratio of navigation bar clicked (def: 800)</p>
-                <p><b>naviLocate:</b>//navigation's id name & starting position</p>
+                <p>
+                    <b>useEasing:</b>//boolean to using Easing effect (def: true)</p>
+                <p>
+                    <b>interval:</b>//interval of scrolling page (def: 25)</p>
+                <p>
+                    <b>scrollLimit:</b>//right scroll limit (def: 8000)</p>
+                <p>
+                    <b>scrollRatio:</b>//rate ratio of scrolling page (def: 500)</p>
+                <p>
+                    <b>naviRatio:</b>//rate ratio of navigation bar clicked (def: 800)</p>
+                <p>
+                    <b>naviLocate:</b>//navigation's id name & starting position</p>
                 <p class="animated bounceInDown">For Example : { navi_demo: 0, navi_start: 100 }</p>
             </div>
             <div class="start" data-stellar-ratio="1" style="left: 43%;">
-                <p><b>scrollAxis:</b>//Set scrolling axis (def: 'x')</p>
-                <p><b>horiScroll:</b>//Set scrolling to be horizontal scrolling (def: true)</p>
-                <p><b>vertiScroll:</b>//Set scrolling to be vertical scrolling (def: true)</p>
-                <p><b>response:</b>//Refreshes parallax content on window load and resize (def: false)</p>
-                <p><b>parallaxB:</b>//Enable or disable the Backgrounds of parallax (def: true)</p>
-                <p><b>parallaxE:</b>//Enable or disable the Elements of parallax (def: true)</p>
-                <p><b>hideElem:</b>//Hide parallax elements that move outside the viewport (def: true)</p>
+                <p>
+                    <b>scrollAxis:</b>//Set scrolling axis (def: 'x')</p>
+                <p>
+                    <b>horiScroll:</b>//Set scrolling to be horizontal scrolling (def: true)</p>
+                <p>
+                    <b>vertiScroll:</b>//Set scrolling to be vertical scrolling (def: true)</p>
+                <p>
+                    <b>response:</b>//Refreshes parallax content on window load and resize (def: false)</p>
+                <p>
+                    <b>parallaxB:</b>//Enable or disable the Backgrounds of parallax (def: true)</p>
+                <p>
+                    <b>parallaxE:</b>//Enable or disable the Elements of parallax (def: true)</p>
+                <p>
+                    <b>hideElem:</b>//Hide parallax elements that move outside the viewport (def: true)</p>
             </div>
             <div class="start" data-stellar-ratio="1" style="left: 65%;">
-                <p><b>hideType:</b>//Customise hidden (def: function($elem){$elem.fadeOut()})</p>
-                <p><b>showType:</b>//Customise shown (def: function($elem){$elem.show()})</p>
-                <p><b>refValueW:</b>//The reference value of browser width (def: $(window).width())</p>
-                <p><b>refValueH:</b>//The reference value of browser height (def: $(window).height())</p>
-                <p><b>navId:</b>//setting the navigation name to plugin (def: '#navi')</p>
-                <p><b>formula:</b>//proportional Formula</p>
+                <p>
+                    <b>hideType:</b>//Customise hidden (def: function($elem){$elem.fadeOut()})</p>
+                <p>
+                    <b>showType:</b>//Customise shown (def: function($elem){$elem.show()})</p>
+                <p>
+                    <b>refValueW:</b>//The reference value of browser width (def: $(window).width())</p>
+                <p>
+                    <b>refValueH:</b>//The reference value of browser height (def: $(window).height())</p>
+                <p>
+                    <b>navId:</b>//setting the navigation name to plugin (def: '#navi')</p>
+                <p>
+                    <b>formula:</b>//proportional Formula</p>
                 <p class="animated bounceInDown">For Example : function(a, b){ return Math.round(a / b * 100) / 100; }</p>
             </div>
             <div class="start" data-stellar-ratio="1" style="left: 86%;">
                 <h2 data-animated='{"sdist":"2800", "css3":"bounceInUp"}'>Mix Effect's Rule</h2>
                 <h3>if A = stellar, B = Parallax, C = CSS3</h3>
-                <p><b>then : </b></p>
+                <p>
+                    <b>then : </b>
+                </p>
                 <p>A + B + C == FINE</p>
                 <p>A +(B or C) == FINE</p>
-                <p><b>but : </b></p>
+                <p>
+                    <b>but : </b>
+                </p>
                 <p>A + B + B == ERROR</p>
                 <p>A + C + C == ERROR</p>
             </div>
@@ -202,15 +228,19 @@
                             </xmp>
                         </blockquote>
                         <blockquote>
-                            <xmp><img src="Frame.png" /> //Element Image</xmp>
+                            <xmp>
+                                <img src="Frame.png" /> //Element Image</xmp>
                         </blockquote>
                         <xmp>
                             </div>
                         </xmp>
                     </div>
                     <p>
-                        As above, <b>data-stellar-ratio</b> provides parallax scrolling, <b>data-frame</b> provides parallax action
-                        <br>and <b>data-animated</b> provides the CSS3 animation effects.
+                        As above,
+                        <b>data-stellar-ratio</b> provides parallax scrolling,
+                        <b>data-frame</b> provides parallax action
+                        <br>and
+                        <b>data-animated</b> provides the CSS3 animation effects.
                     </p>
                 </div>
             </div>
@@ -218,18 +248,31 @@
                 <!--The Rule-->
                 <div style="width:100%; float:left;">
                     <h2 data-animated='{"sdist":"3800", "css3":"bounceInUp"}'>The Rule of Parameter Setting : </h2>
-                    <p><b>No.1 </b>All parameters are setting in pixel ( No accept percent )</p>
+                    <p>
+                        <b>No.1 </b>All parameters are setting in pixel ( No accept percent )</p>
                     <blockquote>
-                        <p><u>when resize the window will auto calculate relative pixel</u></p>
+                        <p>
+                            <u>when resize the window will auto calculate relative pixel</u>
+                        </p>
                     </blockquote>
-                    <p><b>No.2 </b>data-init-* is a action initialized setting</p>
-                    <p><b>No.3 </b>data-init-dist setting the start position of animation ( Pixel )</p>
-                    <p><b>No.4 </b>data-action-* is a customise animation setting</p>
-                    <p><b>No.5 </b>data-action-direct setting the Direction of animation ( Boolean )</p>
-                    <p><b>No.6 </b>data-action-axis setting the Axis of animation ( Boolean )</p>
-                    <p><b>No.7 </b>sdist & edist exist in all action ( sdist <b>def: 0</b> ) ( edist <b>def: window scope</b> )</p>
+                    <p>
+                        <b>No.2 </b>data-init-* is a action initialized setting</p>
+                    <p>
+                        <b>No.3 </b>data-init-dist setting the start position of animation ( Pixel )</p>
+                    <p>
+                        <b>No.4 </b>data-action-* is a customise animation setting</p>
+                    <p>
+                        <b>No.5 </b>data-action-direct setting the Direction of animation ( Boolean )</p>
+                    <p>
+                        <b>No.6 </b>data-action-axis setting the Axis of animation ( Boolean )</p>
+                    <p>
+                        <b>No.7 </b>sdist & edist exist in all action ( sdist
+                        <b>def: 0</b> ) ( edist
+                        <b>def: window scope</b> )</p>
                     <blockquote>
-                        <p><u>NOTE! window scope is Width in horizontal scroll and Height in vertical</u></p>
+                        <p>
+                            <u>NOTE! window scope is Width in horizontal scroll and Height in vertical</u>
+                        </p>
                     </blockquote>
                 </div>
             </div>
@@ -238,9 +281,12 @@
                 <div style="width:50%; float:left;">
                     <h2 data-animated='{"sdist":"4200", "css3":"rotateInDownLeft"}'>Rotate Action</h2>
                     <h3 class="animated rotateInUpRight">Rotate Action Setting : </h3>
-                    <p><b>rotate</b> : animation trigger angle</p>
-                    <p><b>speed</b> : animation rotate speed</p>
-                    <p><b>direct</b> : animation direction in scrolling</p>
+                    <p>
+                        <b>rotate</b> : animation trigger angle</p>
+                    <p>
+                        <b>speed</b> : animation rotate speed</p>
+                    <p>
+                        <b>direct</b> : animation direction in scrolling</p>
                 </div>
                 <div style="width:50%; float:left;">
                     <h4 class="animated tada">Rotate Action Setting Example : </h4>
@@ -259,14 +305,22 @@
                 <div style="width:50%; float:left;">
                     <h2 data-animated='{"sdist":"5200", "css3":"bounceIn"}'>Scale Action</h2>
                     <h3 class="animated rollIn">Scale Action Setting : </h3>
-                    <p><b>dist</b> : animation position</p>
-                    <p><b>sdist</b> : animation starting position</p>
-                    <p><b>scale</b> : animation starting size</p>
-                    <p><b>speed</b> : animation speed in distance</p>
-                    <p><b>resize</b> : each scaling size</p>
-                    <p><b>direct</b> : animation direction in scrolling</p>
-                    <p><b>max</b> : animation scaling maximum size</p>
-                    <p><b>min</b> : animation scaling minimum size</p>
+                    <p>
+                        <b>dist</b> : animation position</p>
+                    <p>
+                        <b>sdist</b> : animation starting position</p>
+                    <p>
+                        <b>scale</b> : animation starting size</p>
+                    <p>
+                        <b>speed</b> : animation speed in distance</p>
+                    <p>
+                        <b>resize</b> : each scaling size</p>
+                    <p>
+                        <b>direct</b> : animation direction in scrolling</p>
+                    <p>
+                        <b>max</b> : animation scaling maximum size</p>
+                    <p>
+                        <b>min</b> : animation scaling minimum size</p>
                 </div>
                 <div style="width:50%; float:left;">
                     <h4 class="animated tada">Scale Action Setting Example : </h4>
@@ -289,20 +343,31 @@
                 <div style="width:40%; float:left;">
                     <h2 data-animated='{"sdist":"6000", "css3":"fadeInDown"}'>Frame Action</h2>
                     <h3 class="animated rotateInDownRight">Frame Action Setting : </h3>
-                    <p><b>dist</b> : animation position</p>
-                    <p><b>sdist</b> : animation starting position</p>
-                    <p><b>now</b> : currently animation frame</p>
-                    <p><b>next</b> : next animation frame</p>
-                    <p><b>speed</b> : animation speed in distance</p>
+                    <p>
+                        <b>dist</b> : animation position</p>
+                    <p>
+                        <b>sdist</b> : animation starting position</p>
+                    <p>
+                        <b>now</b> : currently animation frame</p>
+                    <p>
+                        <b>next</b> : next animation frame</p>
+                    <p>
+                        <b>speed</b> : animation speed in distance</p>
                 </div>
                 <div style="width:60%; float:left;">
                     <h4 class="animated tada">Frame Action Setting Example : </h4>
                     <div class="textbox" style="width:100%;">
                         <xmp>data-init-frame='{"dist":"7400","now":"0","next":"0"}'</xmp>
                         <xmp>data-frame='{"sdist":"7400", "speed":"200"}'</xmp>
-                        <xmp><img src="1.png" style="display:block;"></xmp>
-                        <xmp><img src="2.png" style="display:none;"></xmp>
-                        <xmp><img src="3.png" style="display:none;"></xmp>
+                        <xmp>
+                            <img src="1.png" style="display:block;">
+                        </xmp>
+                        <xmp>
+                            <img src="2.png" style="display:none;">
+                        </xmp>
+                        <xmp>
+                            <img src="3.png" style="display:none;">
+                        </xmp>
                     </div>
                     <div data-stellar-ratio="1">
                         <div data-init-frame='{"dist":"7400","now":"0","next":"0"}' data-frame='{"sdist":"7400", "speed":"200"}'>
@@ -318,12 +383,18 @@
                 <div style="width:50%; float:left;">
                     <h2 data-animated='{"sdist":"7700", "css3":"flash"}'>Mask Action</h2>
                     <h3 class="animated slideInRight">Mask Action Setting : </h3>
-                    <p><b>dist</b> : animation position</p>
-                    <p><b>sdist</b> : animation starting position</p>
-                    <p><b>speed</b> : animation speed in distance</p>
-                    <p><b>clip</b> : each adjustment of mask clip</p>
-                    <p><b>direct</b> : animation direction in scrolling</p>
-                    <p><b>axis</b> : animation axis in scrolling</p>
+                    <p>
+                        <b>dist</b> : animation position</p>
+                    <p>
+                        <b>sdist</b> : animation starting position</p>
+                    <p>
+                        <b>speed</b> : animation speed in distance</p>
+                    <p>
+                        <b>clip</b> : each adjustment of mask clip</p>
+                    <p>
+                        <b>direct</b> : animation direction in scrolling</p>
+                    <p>
+                        <b>axis</b> : animation axis in scrolling</p>
                 </div>
                 <div style="width:50%; float:left;">
                     <h4 class="animated tada">Mask Action Setting Example : </h4>
@@ -334,7 +405,9 @@
                             <xmp>"direct":"1", "axis":"1"}'</xmp>
                         </blockquote>
                         <p>// Exist when using a custom mask image</p>
-                        <xmp><img src="mask.jpg" style="width:0px; height:100px;" /></xmp>
+                        <xmp>
+                            <img src="mask.jpg" style="width:0px; height:100px;" />
+                        </xmp>
                     </div>
                     <div data-stellar-ratio="1" style="background-color:silver; width:100px; height:100px;">
                         <div style="background-color:gold; width:100px; height:0px;" data-init-mask='{"dist":"8600"}' data-mask='{"sdist":"8600", "speed":"100", "clip":"10", "direct":"1", "axis":"1"}'>
@@ -347,9 +420,12 @@
                 <div style="width:50%; float:left;">
                     <h2 data-animated='{"sdist":"9400", "css3":"flip"}'>CSS Sprite Action</h2>
                     <h3 class="animated fadeInUp">CSS Sprite Action Setting : </h3>
-                    <p><b>speed</b> : animation Moving speed</p>
-                    <p><b>direct</b> : animation direction in scrolling</p>
-                    <p><b>axis</b> : animation axis in scrolling</p>
+                    <p>
+                        <b>speed</b> : animation Moving speed</p>
+                    <p>
+                        <b>direct</b> : animation direction in scrolling</p>
+                    <p>
+                        <b>axis</b> : animation axis in scrolling</p>
                 </div>
                 <div style="width:50%; float:left;">
                     <h4 class="animated tada">CSS Sprite Action Setting Example : </h4>
@@ -367,14 +443,22 @@
                 <div style="width:50%; float:left;">
                     <h2 data-animated='{"sdist":"10200", "css3":"wobble"}'>Move Action</h2>
                     <h3 class="animated swing">Move Action Setting : </h3>
-                    <p><b>dist</b> : animation position</p>
-                    <p><b>sdist</b> : animation starting position</p>
-                    <p><b>posi</b> : animation ending position</p>
-                    <p><b>speed</b> : animation Moving speed</p>
-                    <p><b>moving</b> : each moving distance of image</p>
-                    <p><b>direct</b> : animation direction in scrolling</p>
-                    <p><b>max</b> : animation scaling maximum position</p>
-                    <p><b>min</b> : animation scaling minimum position</p>
+                    <p>
+                        <b>dist</b> : animation position</p>
+                    <p>
+                        <b>sdist</b> : animation starting position</p>
+                    <p>
+                        <b>posi</b> : animation ending position</p>
+                    <p>
+                        <b>speed</b> : animation Moving speed</p>
+                    <p>
+                        <b>moving</b> : each moving distance of image</p>
+                    <p>
+                        <b>direct</b> : animation direction in scrolling</p>
+                    <p>
+                        <b>max</b> : animation scaling maximum position</p>
+                    <p>
+                        <b>min</b> : animation scaling minimum position</p>
                 </div>
                 <div style="width:50%; float:left;">
                     <h4 class="animated tada">Move Action Setting Example : </h4>
@@ -403,39 +487,18 @@
             <div class="music_12" data-stellar-ratio="1.2" data-animated='{"sdist":"9200", "css3":"lightSpeedIn"}'></div>
             <div class="batsfadeout" data-stellar-ratio="1" data-animated='{"sdist":"6800", "css3":"fadeOutUp"}'></div>
         </section>
-        <section id="contact">
-            <!--section contact-->
-            <div class="contact" data-stellar-ratio="1">
-                <h1 data-animated='{"sdist":"10800", "css3":"bounceInUp"}'>Contact</h1>
-                <p><b>html5.parallax.js was produced by Shawn Wu in 20131024</b></p>
-                <blockquote>
-                    <p class="mylink">
-                        @Wu Shang En on <a href="https://www.facebook.com/shangen.wu">Facebook</a> or <a href="https://twitter.com/WuShangEn">Twitter</a>
-                    </p>
-                </blockquote>
-                <blockquote>
-                    <p class="mylink">
-                        @This project under the <a href="_mitLicense.html">MIT License</a>
-                    </p>
-                </blockquote>
-                <blockquote>
-                    <p class="mylink">
-                        @Fork me on <a href="https://github.com/xenophon566">Github</a>
-                    </p>
-                </blockquote>
-            </div>
-            <div class="batsfadeoutlast" data-stellar-ratio="1" data-animated='{"sdist":"11840", "css3":"fadeOutUp"}'></div>
-            <div class="deathlast" data-stellar-ratio="1" data-animated='{"sdist":"11840", "css3":"fadeOutDown"}'></div>
-            <div class="pumpkinlast" data-stellar-ratio="1" data-animated='{"sdist":"11840", "css3":"bounce"}'></div>
-            <div class="music_11_last" data-stellar-ratio="1" data-animated='{"sdist":"11840", "css3":"flipInY"}'></div>
-        </section>
         <div id="navi_bar">
             <!--navigation bar-->
             <ul>
-                <li><a href="#" id="navi_demo" class="active">Demo</a></li>
-                <li><a href="#" id="navi_start" class>Getting Started</a></li>
-                <li><a href="#" id="navi_document" class>Document</a></li>
-                <li><a href="#" id="navi_contact" class>Contact</a></li>
+                <li>
+                    <a href="#" id="navi_demo" class="active">Demo</a>
+                </li>
+                <li>
+                    <a href="#" id="navi_start" class>Getting Started</a>
+                </li>
+                <li>
+                    <a href="#" id="navi_document" class>Document</a>
+                </li>
             </ul>
         </div>
     </div>
