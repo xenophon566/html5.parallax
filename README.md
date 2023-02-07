@@ -1,18 +1,31 @@
-Html5.parallax
-=========
+# Html5.parallax
 
-##### Describe
+## Getting Started
+
+1. npm install
+2. npm run dev
+
+## or
+
+🌟 Open on browser directly
+
+## Describe
+
 Parallax scrolling effects on your project
 
-##### Features
-1. Set element by data attribute (data-*)
+## Features
+
+1. Set element by data attribute (data-\*)
 2. Rotate, Scale etc. actions supports
 
-##### Including
+## Including
+
 Stellar.js [markdalgleish](http://markdalgleish.com/projects/stellar.js/)
 
-##### Base on
+## Base on
+
 HTML5, CSS3
 
-##### License
+## License
+
 under the MIT License Copyright (c) {{2013 Shawn Wu}}
