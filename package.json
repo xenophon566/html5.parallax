@@ -4,8 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "author": "",
+  "devDependencies": {
+    "vite": "^4.1.0"
+  },
+  "author": "Shawn Wu",
   "license": "MIT"
 }
